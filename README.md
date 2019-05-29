@@ -35,6 +35,9 @@ c.	All electronic components to realise a level shifter (needed between Node MCU
 d.	A wall-plug power supply to drive the electronics 
 e.	A guide to build up the level shifter and getting started with the software
 
+Kit Info:
+https://www.ebenfeld.de/2019/05/16/esp32-with-adafruit-medium-rgb-matrix-panel/
+
 ### Something to win?!
 a.	A jury (lead by Sven Ebenfeld / Clemens Fahr / Jochen Wriske) will evaluate the ideas based on some principles:
 –	”Creativity OVER Complexity“ (or  “Coolness OVER Coding Effort”)
