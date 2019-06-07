@@ -37,6 +37,9 @@ e.	A guide to build up the level shifter and getting started with the software
 
 Kit Info:
 https://www.ebenfeld.de/2019/05/16/esp32-with-adafruit-medium-rgb-matrix-panel/
+
+![](https://wiki.ai-thinker.com/_media/esp32/boards/nodemcu/nodemcu_32s_pin.png)
+
 ?? https://wiki.ai-thinker.com/esp32/boards/nodemcu_32s 
 
 
