@@ -37,6 +37,8 @@ e.	A guide to build up the level shifter and getting started with the software
 
 Kit Info:
 https://www.ebenfeld.de/2019/05/16/esp32-with-adafruit-medium-rgb-matrix-panel/
+?? https://wiki.ai-thinker.com/esp32/boards/nodemcu_32s 
+
 
 ### Something to win?!
 a.	A jury (lead by Sven Ebenfeld / Clemens Fahr / Jochen Wriske) will evaluate the ideas based on some principles:
