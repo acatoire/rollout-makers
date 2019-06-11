@@ -33,6 +33,10 @@
 #include <WebServer.h>
 #include <ESPmDNS.h>
 
+#include "config.h"
+
+void wifiConnect(void);
+void serverConfig(void);
 
 // Pages function prototypes
 void pageRoot(void);
@@ -41,53 +45,26 @@ void pageText(void);
 void drawGraph(void);
 void pageError(void);
 
-// Config inclusion
-const char *ssid = "Bender Aphrodite";
-const char *password = "bender le chat de ginette";
+
+const char *ssid = WIFI_SSID;
+const char *password = WIFI_PASS;
 
 //Global declaration
 WebServer server(80);
 const int led = 13;
 
+
 void setup(void) 
 {
+  // Board config
   pinMode(led, OUTPUT);
   digitalWrite(led, 0);
-  Serial.begin(115200);
-  WiFi.mode(WIFI_STA);
-  WiFi.begin(ssid, password);
-  Serial.println("");
-
-  // Wait for connection
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(500);
-    Serial.print(".");
-  }
-
-  Serial.println("");
-  Serial.print("Connected to ");
-  Serial.println(ssid);
-  Serial.print("IP address: ");
-  Serial.println(WiFi.localIP());
-
-  if (MDNS.begin("esp32")) 
-  {
-    Serial.println("MDNS responder started");
-  }
   
+  Serial.begin(115200);
 
-  // Server request management
-  server.on("/", pageRoot);
-  server.on("/minion", pageMinion);
-  server.on("/text", pageText);
-  server.on("/test.svg", drawGraph);
-  server.on("/inline", []() {
-    server.send(200, "text/plain", "this works as well");
-  });
-  server.onNotFound(pageError);
-  server.begin();
-  Serial.println("HTTP server started");
+  wifiConnect();
+  serverConfig();
+
 }
 
 
@@ -97,6 +74,7 @@ void loop(void)
 }
 
 
+// **************************** PAGES ******************************//
 void pageRoot(void) 
 {
   digitalWrite(led, 1);
@@ -187,4 +165,49 @@ void drawGraph(void)
   out += "</g>\n</svg>\n";
 
   server.send(200, "image/svg+xml", out);
+}
+
+
+// **************************** Functions ******************************//
+void wifiConnect(void)
+{
+  
+  WiFi.mode(WIFI_STA);
+  WiFi.begin(ssid, password);
+  Serial.println("");
+
+  // Wait for connection
+  while (WiFi.status() != WL_CONNECTED)
+  {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("");
+  Serial.print("Connected to ");
+  Serial.println(ssid);
+  Serial.print("IP address: ");
+  Serial.println(WiFi.localIP());
+  
+}
+
+void serverConfig(void)
+{
+  if (MDNS.begin("esp32")) 
+  {
+    Serial.println("MDNS responder started");
+  }
+  
+
+  // Server request management
+  server.on("/", pageRoot);
+  server.on("/minion", pageMinion);
+  server.on("/text", pageText);
+  server.on("/test.svg", drawGraph);
+  server.on("/inline", []() {
+    server.send(200, "text/plain", "this works as well");
+  });
+  server.onNotFound(pageError);
+  server.begin();
+  Serial.println("HTTP server started");
 }
