@@ -45,11 +45,11 @@ void pageText(void);
 void drawGraph(void);
 void pageError(void);
 
-
+// Config
 const char *ssid = WIFI_SSID;
 const char *password = WIFI_PASS;
 
-//Global declaration
+// Global declaration
 WebServer server(80);
 const int led = 13;
 
