@@ -59,16 +59,19 @@ const int led = 13;
 WiFiClient client;
 GoogleMapsApi api(GOOGLE_MAP_API_KEY, client);
 
+//flag for debug
+bool request_flag = true;
+
 //Inputs
 
-String origin = "143 Boulevard Robert Schuman, Nantes";
-String destination = "17 Rue de la Petite Baratte, 44315 Nantes";
+String origin = "Nantes";//"143 Boulevard Robert Schuman, Nantes";
+String destination = "Carquefou";// "17 Rue de la Petite Baratte, 44315 Nantes";
 // For both origin and destination you should be
 // able to pass multiple seperated by a |
 // e.g destination1|destination2 etc
 
 //Free Google Maps Api only allows for 2500 "elements" a day, so carful you dont go over
-int api_mtbs = 600000; //mean time between api requests
+int api_mtbs = 6000; //mean time between api requests
 long api_lasttime = 0;   //last time api request has been done
 bool firstTime = true;
 
@@ -84,7 +87,6 @@ void setup(void)
   digitalWrite(led, 0);
 
   Serial.begin(115200);
-
   wifiConnect();
   serverConfig();
 
@@ -100,6 +102,7 @@ void loop(void)
 // **************************** PAGES ******************************//
 void pageRoot(void)
 {
+  Serial.println("Page root requested");
   digitalWrite(led, 1);
   char temp[400];
   int sec = millis() / 1000;
@@ -162,10 +165,47 @@ void pageText(void)
 
 void pageItineraire(void)
 {
-  if ((millis() > api_lasttime + api_mtbs))  {
-    checkGoogleMaps();
-    api_lasttime = millis();
+  String out = "map not working for now ";
+
+  //////debug//////
+  if (request_flag)
+  {
+    out = "Getting traffic from" + origin + " to " + destination;
+    String responseString = api.distanceMatrix(origin, destination, departureTime, trafficModel);
+    DynamicJsonBuffer jsonBuffer;
+    JsonObject& response = jsonBuffer.parseObject(responseString);
+    if (response.success()) {
+      if (response.containsKey("rows")) {
+        JsonObject& element = response["rows"][0]["elements"][0];
+        String status = element["status"];
+        if (status == "OK")
+        {
+          String distance = element["distance"]["text"];
+          String duration = element["duration"]["text"];
+          String durationInTraffic = element["duration_in_traffic"]["text"];
+
+          out += "Distance: " + distance;
+          out += "Distance: " + duration;
+          out += "Distance: " + durationInTraffic;
+        }
+        else {
+          out += "Got an error status: " + status;
+        }
+      } else {
+        out += "Reponse did not contain rows";
+      }
+    } else {
+      //out += "Failed to parse Json";
+    }
+    request_flag = false;
   }
+
+  //////debug end////////
+  /*if ((millis() > api_lasttime + api_mtbs))  {
+    checkGoogleMaps(out);
+    api_lasttime = millis();
+    }*/
+  server.send(200, "text/plain", out);
 }
 
 
@@ -234,8 +274,8 @@ void serverConfig(void)
   Serial.println("HTTP server started");
 }
 
-void checkGoogleMaps() {
-  String out = "";
+/*String checkGoogleMaps(String out) {
+
   out += "Getting traffic for " + origin + " to " + destination;
   String responseString = api.distanceMatrix(origin, destination, departureTime, trafficModel);
   DynamicJsonBuffer jsonBuffer;
@@ -255,13 +295,14 @@ void checkGoogleMaps() {
         out += "Distance: " + durationInTraffic;
       }
       else {
-        Serial.println("Got an error status: " + status);
+        out = "Got an error status: " + status;
       }
     } else {
-      Serial.println("Reponse did not contain rows");
+      out = "Reponse did not contain rows";
     }
   } else {
-    Serial.println("Failed to parse Json");
+    out = "Failed to parse Json";
   }
-  server.send(200, "text/plain", out);
-}
+  out = "function done";
+  return out;
+  }*/
