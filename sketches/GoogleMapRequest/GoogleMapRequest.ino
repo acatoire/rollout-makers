@@ -30,9 +30,10 @@
 
 #include <WiFi.h>
 #include <WiFiClient.h>
+#include <WiFiClientSecure.h>
 #include <WebServer.h>
 #include <ESPmDNS.h>
-#include <GoogleMapsApi.h>
+#include <GoogleMapsDirectionsApi.h>
 
 #include "config.h"
 
@@ -56,16 +57,16 @@ const char *password = WIFI_PASS;
 WebServer server(80);
 const int led = 13;
 
-WiFiClient client;
-GoogleMapsApi api(GOOGLE_MAP_API_KEY, client);
+WiFiClientSecure client;
+GoogleMapsDirectionsApi api(GOOGLE_MAP_API_KEY, client);
 
 //flag for debug
 bool request_flag = true;
 
 //Inputs
 
-String origin = "Nantes";//"143 Boulevard Robert Schuman, Nantes";
-String destination = "Carquefou";// "17 Rue de la Petite Baratte, 44315 Nantes";
+String origin = "143 Boulevard Robert Schuman, Nantes";
+String destination = "17 Rue de la Petite Baratte, 44315 Nantes";
 // For both origin and destination you should be
 // able to pass multiple seperated by a |
 // e.g destination1|destination2 etc
@@ -77,8 +78,7 @@ bool firstTime = true;
 
 
 //Optional
-String departureTime = "now"; //This can also be a timestamp, needs to be in the future for traffic info
-String trafficModel = "best_guess"; //defaults to this anyways. see https://developers.google.com/maps/documentation/distance-matrix/intro#
+DirectionsInputOptions inputOptions;
 
 void setup(void)
 {
@@ -90,6 +90,11 @@ void setup(void)
   wifiConnect();
   serverConfig();
 
+  //These are all optional (although departureTime needed for traffic)
+  inputOptions.departureTime = "now"; //can also be a future timestamp
+  inputOptions.trafficModel = "best_guess"; //Defaults to this anyways
+  inputOptions.avoid = "ferries";
+  inputOptions.units = "metric";
 }
 
 
@@ -166,46 +171,24 @@ void pageText(void)
 void pageItineraire(void)
 {
   String out = "map not working for now ";
-
-  //////debug//////
-  if (request_flag)
+  static bool request_flag = true;
+  if(request_flag)
   {
-    out = "Getting traffic from" + origin + " to " + destination;
-    String responseString = api.distanceMatrix(origin, destination, departureTime, trafficModel);
-    DynamicJsonBuffer jsonBuffer;
-    JsonObject& response = jsonBuffer.parseObject(responseString);
-    if (response.success()) {
-      if (response.containsKey("rows")) {
-        JsonObject& element = response["rows"][0]["elements"][0];
-        String status = element["status"];
-        if (status == "OK")
-        {
-          String distance = element["distance"]["text"];
-          String duration = element["duration"]["text"];
-          String durationInTraffic = element["duration_in_traffic"]["text"];
-
-          out += "Distance: " + distance;
-          out += "Distance: " + duration;
-          out += "Distance: " + durationInTraffic;
-        }
-        else {
-          out += "Got an error status: " + status;
-        }
-      } else {
-        out += "Reponse did not contain rows";
-      }
-    } else {
-      //out += "Failed to parse Json";
-    }
-    request_flag = false;
-  }
-
+  //////debug//////
+  
+    DirectionsResponse response = api.directionsApi(origin, destination, inputOptions);
+    out = "Getting traffic from " + origin + " to " + destination + '\r';
+    out += "Duration in traffic: " + response.durationTraffic_text + '\r';
+    out += "Distance: " + response.distance_text + '\r';
+    
   //////debug end////////
   /*if ((millis() > api_lasttime + api_mtbs))  {
     checkGoogleMaps(out);
     api_lasttime = millis();
     }*/
-  server.send(200, "text/plain", out);
+  }
+  request_flag = false;
+  server.send(2000, "text/plain", out);
 }
 
 
