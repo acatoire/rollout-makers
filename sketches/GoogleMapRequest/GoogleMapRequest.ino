@@ -95,6 +95,7 @@ void setup(void)
   inputOptions.trafficModel = "best_guess"; //Defaults to this anyways
   inputOptions.avoid = "ferries";
   inputOptions.units = "metric";
+  inputOptions.travelMode = "driving"; //BICYCLING
 }
 
 
@@ -175,12 +176,18 @@ void pageItineraire(void)
   if(request_flag)
   {
   //////debug//////
-  
+
+    inputOptions.travelMode = "driving"; //BICYCLING
     DirectionsResponse response = api.directionsApi(origin, destination, inputOptions);
     out = "Getting traffic from " + origin + " to " + destination + '\r';
-    out += "Duration in traffic: " + response.durationTraffic_text + '\r';
+    out += "Duration in car: " + response.durationTraffic_text + '\r';
     out += "Distance: " + response.distance_text + '\r';
-    
+
+    inputOptions.TravelMode = "bicycling";
+    DirectionsResponse response = api.directionsApi(origin, destination, inputOptions);
+    out = "Getting traffic from " + origin + " to " + destination + '\r';
+    out += "Duration in car: " + response.durationTraffic_text + '\r';
+    out += "Distance: " + response.distance_text + '\r';
   //////debug end////////
   /*if ((millis() > api_lasttime + api_mtbs))  {
     checkGoogleMaps(out);
