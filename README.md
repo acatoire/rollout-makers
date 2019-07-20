@@ -49,3 +49,6 @@ a.	A jury (lead by Sven Ebenfeld / Clemens Fahr / Jochen Wriske) will evaluate t
 –	“Project description OVER Arts“ (or “code re-usability” OVER “polished surfaces”)  
 a.	The 1st price will be “a voucher for a dinner”, but we believe more in the Olympic Idea! Additionally the winner gets the honour to „Run the next event“!
 
+
+###Good links###
+https://www.pixilart.com/draw#
