@@ -168,7 +168,6 @@ void pageText(void)
   server.send(200, "text/plain", out);
 }
 
-
 void pageItineraire(void)
 {
   String out = "map not working for now ";
@@ -177,16 +176,16 @@ void pageItineraire(void)
   {
   //////debug//////
 
-    inputOptions.travelMode = "driving"; //BICYCLING
+    inputOptions.travelMode = "DRIVING"; //BICYCLING
     DirectionsResponse response = api.directionsApi(origin, destination, inputOptions);
     out = "Getting traffic from " + origin + " to " + destination + '\r';
     out += "Duration in car: " + response.durationTraffic_text + '\r';
     out += "Distance: " + response.distance_text + '\r';
 
-    inputOptions.TravelMode = "bicycling";
-    DirectionsResponse response = api.directionsApi(origin, destination, inputOptions);
-    out = "Getting traffic from " + origin + " to " + destination + '\r';
-    out += "Duration in car: " + response.durationTraffic_text + '\r';
+    inputOptions.travelMode = "BICYCLING";
+    response = api.directionsApi(origin, destination, inputOptions);
+    out += "Getting traffic from " + origin + " to " + destination + '\r';
+    out += "Duration in bicycling: " + response.durationTraffic_text + '\r';
     out += "Distance: " + response.distance_text + '\r';
   //////debug end////////
   /*if ((millis() > api_lasttime + api_mtbs))  {
