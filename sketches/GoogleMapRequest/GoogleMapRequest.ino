@@ -63,16 +63,20 @@ GoogleMapsDirectionsApi api(GOOGLE_MAP_API_KEY, client);
 //flag for debug
 bool request_flag = true;
 
-//Inputs
+//Google map Inputs
 
 String origin = "143 Boulevard Robert Schuman, Nantes";
 String destination = "17 Rue de la Petite Baratte, 44315 Nantes";
+
+//google map output
+DirectionsResponse responseCar;
+DirectionsResponse responseBicycling;
 // For both origin and destination you should be
 // able to pass multiple seperated by a |
 // e.g destination1|destination2 etc
 
 //Free Google Maps Api only allows for 2500 "elements" a day, so carful you dont go over
-int api_mtbs = 6000; //mean time between api requests
+int api_mtbs = 10000; //mean time between api requests
 long api_lasttime = 0;   //last time api request has been done
 bool firstTime = true;
 
@@ -168,35 +172,65 @@ void pageText(void)
   server.send(200, "text/plain", out);
 }
 
-void pageItineraire(void)
+void pageItineraireCar(void)
 {
+  DirectionsResponse response;
   String out = "map not working for now ";
-  static bool request_flag = true;
-  if(request_flag)
+  unsigned long timeNow = millis();
+  if ((timeNow > api_lasttime + api_mtbs))
   {
-  //////debug//////
+    //////debug//////
 
-    inputOptions.travelMode = "DRIVING"; //BICYCLING
-    DirectionsResponse response = api.directionsApi(origin, destination, inputOptions);
-    out = "Getting traffic from " + origin + " to " + destination + '\r';
-    out += "Duration in car: " + response.durationTraffic_text + '\r';
-    out += "Distance: " + response.distance_text + '\r';
-
-    inputOptions.travelMode = "BICYCLING";
+    inputOptions.travelMode = "driving"; 
     response = api.directionsApi(origin, destination, inputOptions);
-    out += "Getting traffic from " + origin + " to " + destination + '\r';
-    out += "Duration in bicycling: " + response.durationTraffic_text + '\r';
-    out += "Distance: " + response.distance_text + '\r';
-  //////debug end////////
-  /*if ((millis() > api_lasttime + api_mtbs))  {
-    checkGoogleMaps(out);
-    api_lasttime = millis();
-    }*/
+    responseCar = response;
+    response = api.directionsApi(origin, destination, inputOptions);
+    //////debug end////////
+    /*if ((millis() > api_lasttime + api_mtbs))  {
+      checkGoogleMaps(out);
+      api_lasttime = millis();
+      }*/
+    api_lasttime = timeNow + api_mtbs;
   }
-  request_flag = false;
+  else
+  {
+
+  }
+  out = "Getting traffic from " + origin + " to " + destination + '\r';
+  out += "Duration in car: " + responseCar.durationTraffic_text + '\r';
+  out += "Distance: " + responseCar.distance_text + '\r';
   server.send(2000, "text/plain", out);
 }
 
+void pageItineraireBicycling(void)
+{
+  DirectionsResponse response;
+  String out = "map not working for now ";
+  if ((millis() > api_lasttime + api_mtbs))
+  {
+    //////debug//////
+
+    inputOptions.travelMode = "bicycling";
+    inputOptions.trafficModel = "";
+    response = api.directionsApi(origin, destination, inputOptions);
+    responseBicycling = response;
+    response = api.directionsApi(origin, destination, inputOptions);
+    //////debug end////////
+    /*if ((millis() > api_lasttime + api_mtbs))  {
+      checkGoogleMaps(out);
+      api_lasttime = millis();
+      }*/
+    api_lasttime = millis();
+  }
+  else
+  {
+
+  }
+  out = "Getting traffic from " + origin + " to " + destination + '\r';
+  out += "Duration in bicycling: " + responseBicycling.duration_text + '\r';
+  out += "Distance: " + responseBicycling.distance_text + '\r';
+  server.send(2000, "text/plain", out);
+}
 
 void drawGraph(void)
 {
@@ -252,7 +286,8 @@ void serverConfig(void)
 
   // Server request management
   server.on("/", pageRoot);
-  server.on("/itineraire", pageItineraire);
+  server.on("/itineraireCar", pageItineraireCar);
+  server.on("/itineraireBicycling", pageItineraireBicycling);
   server.on("/text", pageText);
   server.on("/test.svg", drawGraph);
   server.on("/inline", []() {
