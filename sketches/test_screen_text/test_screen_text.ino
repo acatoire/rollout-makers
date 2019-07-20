@@ -11,6 +11,8 @@
 
 #include <RGBmatrixPanel.h>
 
+#include "MyValue.h"
+
 
 #define byCar   0
 #define byBike  1
@@ -32,6 +34,8 @@ RGBmatrixPanel *matrix = new RGBmatrixPanel(A, B, C, CLK, LAT, OE, true, (uint8_
 #define clear()          fillScreen(0)
 #define show()           swapBuffers(true)
 
+MyValue timeByCar(10);
+MyValue timeByBike(10);
 
 void setup() {
   Serial.begin(115200);
@@ -42,7 +46,7 @@ void setup() {
 
 void loop() {
 
-  screen_bike_car(generate_value(byBike), generate_value(byCar));
+  screen_bike_car(timeByBike.GetValue(), timeByCar.GetValue());
 
   delay(5000);
 
