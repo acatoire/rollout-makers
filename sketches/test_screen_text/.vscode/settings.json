@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "*.tcc": "c",
+        "deque": "c",
+        "unordered_map": "c",
+        "vector": "c",
+        "system_error": "c",
+        "testclass.h": "c"
+    }
+}
