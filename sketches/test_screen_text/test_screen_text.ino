@@ -11,8 +11,8 @@
 
 #include <RGBmatrixPanel.h>
 
-#include "MyValue.h"
-#include "MyScreen.h"
+#include <MyValue.h>
+#include <MyScreen.h>
 
 
 
@@ -33,15 +33,25 @@ void loop()
 {
 
   screen.PrintOoK(0);
+  delay(1000);  
+  screen.PrintOoK(1);
+  delay(1000);  
+  screen.PrintOoK(2);
+  delay(1000);  
+  screen.PrintOoK(3);
+  delay(1000);  
+  screen.PrintOoK(4);
+  delay(1000);
+  screen.PrintOoK(5);
   delay(1000);
   screen.PrintFull(7, 7, 0);
-  delay(1000);
+  delay(200);
   screen.PrintFull(0, 7, 7);
-  delay(1000);
+  delay(200);
   screen.PrintFull(7, 0, 7);
-  delay(1000);
+  delay(200);
   screen.PrintTwoTimes(timeByBike.GetValue(), timeByCar.GetValue());
-  delay(5000);
+  delay(1000);
 
 }
 
