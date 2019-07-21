@@ -7,6 +7,8 @@ Rollout project for the 2019 We make it happen Contest
 ## Sources ##
 Checkout the project from https://github.com/acatoire/rollout-makers
 
+The target board is node32s
+
 ## Needed arduino libraries ##
 From library manager, install:
 - Adafruit GFX Library
