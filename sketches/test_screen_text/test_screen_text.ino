@@ -11,80 +11,47 @@
 
 #include <RGBmatrixPanel.h>
 
-
-#define byCar   0
-#define byBike  1
-
-uint8_t generate_value(uint8_t type);
-void screen_bike_car (uint8_t minutesByBike, uint8_t minutesByCar);
+#include <MyValue.h>
+#include <MyScreen.h>
 
 
-#define CLK 4
-#define OE   0
-#define LAT 2
-#define A   12
-#define B   13
-#define C   14
 
-const uint8_t rgbpins[] = { 17,18,19,21,22,23 };
-RGBmatrixPanel *matrix = new RGBmatrixPanel(A, B, C, CLK, LAT, OE, true, (uint8_t *)rgbpins);
+MyScreen screen;
+MyValue timeByCar(10);
+MyValue timeByBike(10);
 
-#define clear()          fillScreen(0)
-#define show()           swapBuffers(true)
+void setup() 
+{
 
-
-void setup() {
   Serial.begin(115200);
   Serial.println("setup");
-  matrix->begin();
+  screen.Setup();
 
 }
 
-void loop() {
-
-  screen_bike_car(generate_value(byBike), generate_value(byCar));
-
-  delay(5000);
-
-}
-
-void screen_bike_car (uint8_t minutesByBike, uint8_t minutesByCar)
+void loop() 
 {
-  
-  String convertNumber;
 
-  Serial.printf ("Update screen bike/car with givens values: %u/%u\n", minutesByBike, minutesByCar);
-  matrix->setTextSize(1);   // size 1 == 8 pixels high
-
-  matrix->clear();
-  
-  // print each letter with a rainbow color
-  matrix->setCursor(8, 0);  // First line
-  matrix->setTextColor(matrix->Color333(0,7,0));
-  
-  convertNumber = String(minutesByBike);
-  
-  matrix->print(convertNumber);
-  matrix->print("mn");
-
-  matrix->setCursor(8, 9);  // Second line
-  matrix->setTextColor(matrix->Color333(7,0,0));
-  convertNumber = String(minutesByCar);
-  
-  matrix->print(convertNumber);
-  matrix->print("mn");
-  
-  matrix->show();
+  screen.PrintOoK(0);
+  delay(1000);  
+  screen.PrintOoK(1);
+  delay(1000);  
+  screen.PrintOoK(2);
+  delay(1000);  
+  screen.PrintOoK(3);
+  delay(1000);  
+  screen.PrintOoK(4);
+  delay(1000);
+  screen.PrintOoK(5);
+  delay(1000);
+  screen.PrintFull(7, 7, 0);
+  delay(200);
+  screen.PrintFull(0, 7, 7);
+  delay(200);
+  screen.PrintFull(7, 0, 7);
+  delay(200);
+  screen.PrintTwoTimes(timeByBike.GetValue(), timeByCar.GetValue());
+  delay(1000);
 
 }
 
-uint8_t generate_value(uint8_t type)
-{
-  uint8_t value;
-  
-  value = random(15, 45);
-
-  Serial.printf ("Generate random value: %u\n", value);
-
-  return value;
-}

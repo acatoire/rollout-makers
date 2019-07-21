@@ -2,7 +2,28 @@
 Rollout project for the 2019 We make it happen Contest
 
 
+# Setup the environement
 
+## Sources ##
+Checkout the project from https://github.com/acatoire/rollout-makers
+
+## Needed arduino libraries ##
+From library manager, install:
+- Adafruit GFX Library
+
+
+## Mounting project libraries ##
+From the Libraries edit mount.bat with the correct path by editing arduino_lib_path and project_lib_path.
+
+Example:
+'''
+set arduino_lib_path="C:\Users\axel\Documents\Arduino\libraries"
+set project_lib_path="C:\gitfolder\rollout-makers\Libraries
+'''
+
+Save the bat file and execut it as administrator(right clic)
+
+Now Library from the the project's Library folder will be seen as a arduino library.
 
 # Contest rules
 
@@ -50,5 +71,8 @@ a.	A jury (lead by Sven Ebenfeld / Clemens Fahr / Jochen Wriske) will evaluate t
 a.	The 1st price will be “a voucher for a dinner”, but we believe more in the Olympic Idea! Additionally the winner gets the honour to „Run the next event“!
 
 
-###Good links###
+### Good links ###
 https://www.pixilart.com/draw#
+
+
+
