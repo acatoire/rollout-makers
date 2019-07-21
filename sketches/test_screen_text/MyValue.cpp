@@ -17,7 +17,6 @@ MyValue::MyValue(uint8_t value)
 void MyValue::Clear() 
 {
 
-  //Serial.println("setup_screen");
   value_m = 0;
 
 }
@@ -26,7 +25,6 @@ void MyValue::Clear()
 void MyValue::Increment(int8_t value) 
 {
 
-  //Serial.println("setup_screen");
   value_m = value_m + value;
 
 }
@@ -35,7 +33,6 @@ void MyValue::Increment(int8_t value)
 void MyValue::Random(void) 
 {
 
-  //Serial.println("setup_screen");
   value_m = random(10, 60);
 
 }

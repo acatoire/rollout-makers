@@ -5,6 +5,11 @@
         "unordered_map": "c",
         "vector": "c",
         "system_error": "c",
-        "testclass.h": "c"
+        "testclass.h": "c",
+        "array": "c",
+        "functional": "c",
+        "type_traits": "c",
+        "tuple": "c",
+        "utility": "c"
     }
 }

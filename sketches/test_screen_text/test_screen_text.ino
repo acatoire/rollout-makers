@@ -16,26 +16,29 @@
 
 
 
-MyScreen screen(15);
+MyScreen screen;
 MyValue timeByCar(10);
 MyValue timeByBike(10);
 
-void setup() {
+void setup() 
+{
+
   Serial.begin(115200);
   Serial.println("setup");
   screen.Setup();
 
 }
 
-void loop() {
+void loop() 
+{
 
-  screen.PrintOoK();
+  screen.PrintOoK(0);
   delay(1000);
-  screen.PrintFull(7, 0, 0);
+  screen.PrintFull(7, 7, 0);
   delay(1000);
-  screen.PrintFull(0, 7, 0);
+  screen.PrintFull(0, 7, 7);
   delay(1000);
-  screen.PrintFull(0, 0, 7);
+  screen.PrintFull(7, 0, 7);
   delay(1000);
   screen.PrintTwoTimes(timeByBike.GetValue(), timeByCar.GetValue());
   delay(5000);
