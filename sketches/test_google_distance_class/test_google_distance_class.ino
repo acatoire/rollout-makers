@@ -4,7 +4,7 @@
 */
 
 #include <WiFi.h>
-#include <WiFiClient.h>
+#include <WiFiClientSecure.h>
 #include <ESPmDNS.h>
 
 #include <MyTravel.h>
@@ -18,8 +18,10 @@ const int led = 13;
 
 bool firstTime = true;
 
+
+WiFiClientSecure client;
 String key = GOOGLE_MAP_API_KEY;
-MyTravel travel(key);
+MyTravel travel(client, key);
 
 void setup(void) 
 {

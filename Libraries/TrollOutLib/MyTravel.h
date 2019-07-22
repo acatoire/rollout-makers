@@ -8,7 +8,6 @@
 
 
 #include <WiFi.h>
-#include <WiFiClient.h>
 #include <ESPmDNS.h>
 
 #include <WiFiClientSecure.h>
@@ -18,8 +17,8 @@
 class MyTravel
 {
   public:
-    MyTravel(String apiKey);
-    void    Init(String from, String to);
+    MyTravel(WiFiClientSecure client, String apiKey);
+    void   Init(String from, String to);
     String GetInfoByBike(void);
     String GetInfoByCar (void);
   
@@ -30,9 +29,7 @@ class MyTravel
     String origin_m       = "143 Boulevard Robert Schuman, Nantes";
     String destination_m  = "17 Rue de la Petite Baratte, 44315 Nantes";
 
-    WiFiClientSecure client_m;
-    String apiKey_m = "AIzaSyDLo1YPxFG6HKQd-uQ3darr7jfa8TgFswA";
-    GoogleMapsDirectionsApi api_m(apiKey_m, client_m); //todo creat in constructor
+    GoogleMapsDirectionsApi api_m; //todo creat in constructor
 
     DirectionsInputOptions inputOptions_m;
 
