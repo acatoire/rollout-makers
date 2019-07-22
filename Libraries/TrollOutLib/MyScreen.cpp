@@ -244,4 +244,39 @@ void MyScreen::PrintBike(uint16_t color, int8_t decX, int8_t decY)
   MyScreen::Update();
 }
 
+void MyScreen::PrintCar(uint16_t color, int8_t decX, int8_t decY)
+{
+  MyScreen::Clear();
+  
+  //Glass of the Car
+  matrix_m->drawLine(decX + 16, decY + 5,  decX + 19, decY + 8,   color); 
+  matrix_m->drawLine(decX + 15, decY + 5,  decX + 18, decY + 8,   color); 
+  // Car
+  matrix_m->drawLine(decX + 2, decY + 8,  decX + 8, decY + 8,   color); 
+  matrix_m->drawLine(decX + 1, decY + 9,  decX + 22, decY + 9,   color); 
+  matrix_m->drawLine(decX + 1, decY + 10,  decX + 24, decY + 10,   color); 
+  matrix_m->drawLine(decX + 1, decY + 11,  decX + 3, decY + 11,   color);   
+  matrix_m->drawLine(decX + 8, decY + 11,  decX + 16, decY + 11,   color);
+  matrix_m->drawLine(decX + 21, decY + 11,  decX + 25, decY + 11,   color); 
+  matrix_m->drawLine(decX + 1, decY + 12,  decX + 2, decY + 12,   color); 
+  matrix_m->drawLine(decX + 9, decY + 12,  decX + 15, decY + 12,   color); 
+  matrix_m->drawLine(decX + 22, decY + 12,  decX + 26, decY + 12,   color); 
+  matrix_m->drawLine(decX + 1, decY + 13,  decX + 2, decY + 13,   color); 
+  matrix_m->drawLine(decX + 9, decY + 13,  decX + 15, decY + 13,   color); 
+  matrix_m->drawLine(decX + 22, decY + 13,  decX + 26, decY + 13,   color); 
+  matrix_m->drawLine(decX + 2, decY + 14,  decX + 2, decY + 14,   color); 
+  matrix_m->drawLine(decX + 9, decY + 14,  decX + 15, decY + 14,   color); 
+  matrix_m->drawLine(decX + 22, decY + 14,  decX + 25, decY + 14,   color); 
+  // back wheel
+  matrix_m->drawLine(decX + 5, decY + 12,  decX + 6, decY + 12,   color);
+  matrix_m->drawLine(decX + 4, decY + 13,  decX + 7, decY + 13,   color);
+  matrix_m->drawLine(decX + 4, decY + 14,  decX + 7, decY + 14,   color);
+  matrix_m->drawLine(decX + 5, decY + 15,  decX + 6, decY + 15,   color);
+  // front wheel 
+  matrix_m->drawLine(decX + 18, decY + 12,  decX + 19, decY + 12,   color);
+  matrix_m->drawLine(decX + 17, decY + 13,  decX + 20, decY + 13,   color);
+  matrix_m->drawLine(decX + 17, decY + 14,  decX + 20, decY + 14,   color);
+  matrix_m->drawLine(decX + 18, decY + 15,  decX + 19, decY + 15,   color);
+  MyScreen::Update();
+} 
 
