@@ -30,10 +30,31 @@ void setup()
 
 void loop() 
 {
+  int8_t i;
 
-  for(int8_t i = -26; i < 35; i++)
+  for(i = 0; i < 30; i++)
   {
-    screen.PrintBike(BLUE, i, -(i/5-1));
+    screen.PrintBmp(1, WHITE, RED, 0, 0);
+    delay(500); 
+    screen.PrintBmp(1, RED, WHITE, 0, 0);
+    delay(500); 
+  }
+
+  for(i = -26; i < 35; i++)
+  {
+    screen.PrintBmp(0, RED, WHITE, i, 0);
+    delay(50); 
+  }
+
+  for(i = -26; i < 35; i++)
+  {
+    screen.PrintCar(RED, i, -4);
+    delay(50); 
+  }
+
+  for(i = -26; i < 35; i++)
+  {
+    screen.PrintBike(BLUE, i, 0);
     delay(50); 
   }
 

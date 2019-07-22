@@ -6,6 +6,14 @@
 #include "Arduino.h"
 
 #include "MyScreen.h"
+#include "MyScreenBmp.h"
+
+
+// Macros
+#define DecDrawLine(A, B, C, D, E) drawLine(decX + A, decY + B, decX + C, decY + D, E)
+
+
+
 
 MyScreen::MyScreen(void)
 {
@@ -176,7 +184,7 @@ void MyScreen::PrintOoK(uint8_t type)
 }
 
 
-void MyScreen::PrintOoK_empty(uint16_t color)
+void MyScreen::TraceOoK_empty(uint16_t color)
 {
 
   // Head : round rectangle
@@ -202,44 +210,44 @@ void MyScreen::PrintBike(uint16_t color, int8_t decX, int8_t decY)
   MyScreen::Clear();
   
   //back wheel
-  matrix_m->drawLine(decX + 3, decY + 5 , decX + 6, decY + 5,   color);  
-  matrix_m->drawLine(decX + 6, decY + 6 , decX + 7, decY + 6,   color);
-  matrix_m->drawLine(decX + 8, decY + 7 , decX + 8, decY + 8,   color);
-  matrix_m->drawLine(decX + 9, decY + 8 , decX + 9, decY + 11,   color);
-  matrix_m->drawLine(decX + 8, decY + 11, decX + 8, decY + 12,   color);
-  matrix_m->drawLine(decX + 6, decY + 13, decX + 7, decY + 13,   color);
-  matrix_m->drawLine(decX + 3, decY + 14, decX + 6, decY + 14,   color);
-  matrix_m->drawLine(decX + 2, decY + 13, decX + 3, decY + 13,   color);
-  matrix_m->drawLine(decX + 1, decY + 11, decX + 1, decY + 12,   color);
-  matrix_m->drawLine(decX + 0, decY + 8 , decX + 0, decY + 11,   color);
-  matrix_m->drawLine(decX + 1, decY + 7 , decX + 1, decY + 8,   color);
-  matrix_m->drawLine(decX + 2, decY + 6 , decX + 3, decY + 6,   color);
+  matrix_m->DecDrawLine(3,  5, 6, 5, color);  
+  matrix_m->DecDrawLine(6,  6, 7, 6,   color);
+  matrix_m->DecDrawLine(8,  7, 8, 8,   color);
+  matrix_m->DecDrawLine(9,  8, 9, 11,   color);
+  matrix_m->DecDrawLine(8, 11, 8, 12,   color);
+  matrix_m->DecDrawLine(6, 13, 7, 13,   color);
+  matrix_m->DecDrawLine(3, 14, 6, 14,   color);
+  matrix_m->DecDrawLine(2, 13, 3, 13,   color);
+  matrix_m->DecDrawLine(1, 11, 1, 12,   color);
+  matrix_m->DecDrawLine(0,  8, 0, 11,   color);
+  matrix_m->DecDrawLine(1,  7, 1, 8,   color);
+  matrix_m->DecDrawLine(2,  6, 3, 6,   color);
   //Front wheel (x -> x+14)
-  matrix_m->drawLine(decX + 17, decY + 5,  decX + 20, decY + 5,   color);  
-  matrix_m->drawLine(decX + 20, decY + 6,  decX + 21, decY + 6,   color);
-  matrix_m->drawLine(decX + 22, decY + 7,  decX + 22, decY + 8,   color);
-  matrix_m->drawLine(decX + 23, decY + 8,  decX + 23, decY + 11,  color);
-  matrix_m->drawLine(decX + 22, decY + 11, decX + 22, decY + 12,  color);
-  matrix_m->drawLine(decX + 20, decY + 13, decX + 21, decY + 13,  color);
-  matrix_m->drawLine(decX + 17, decY + 14, decX + 20, decY + 14,  color);
-  matrix_m->drawLine(decX + 16, decY + 13, decX + 17, decY + 13,  color);
-  matrix_m->drawLine(decX + 15, decY + 11, decX + 15, decY + 12,  color);
-  matrix_m->drawLine(decX + 14, decY + 8,  decX + 14, decY + 11,  color);
-  matrix_m->drawLine(decX + 15, decY + 7,  decX + 15, decY + 8,   color);
-  matrix_m->drawLine(decX + 16, decY + 6,  decX + 17, decY + 6,   color);
+  matrix_m->DecDrawLine(17,5,  20,5,   color);  
+  matrix_m->DecDrawLine(20,6,  21,6,   color);
+  matrix_m->DecDrawLine(22,7,  22,8,   color);
+  matrix_m->DecDrawLine(23,8,  23,11,  color);
+  matrix_m->DecDrawLine(22,11, 22,12,  color);
+  matrix_m->DecDrawLine(20,13, 21,13,  color);
+  matrix_m->DecDrawLine(17,14, 20,14,  color);
+  matrix_m->DecDrawLine(16,13, 17,13,  color);
+  matrix_m->DecDrawLine(15,11, 15,12,  color);
+  matrix_m->DecDrawLine(14,8,  14,11,  color);
+  matrix_m->DecDrawLine(15,7,  15,8,   color);
+  matrix_m->DecDrawLine(16,6,  17,6,   color);
   //Carter
-  matrix_m->drawLine(decX + 5,  decY + 9,  decX + 10, decY + 4,   color);
-  matrix_m->drawLine(decX + 9,  decY + 4,  decX + 16, decY + 4,   color);
-  matrix_m->drawLine(decX + 16, decY + 1,  decX + 16, decY + 5,   color);
-  matrix_m->drawLine(decX + 17, decY + 6,  decX + 18, decY + 9,   color);
-  matrix_m->drawLine(decX + 5,  decY + 10, decX + 11, decY + 10,  color);
-  matrix_m->drawLine(decX + 7,  decY + 2,  decX + 10, decY + 9,   color);
-  matrix_m->drawLine(decX + 11, decY + 9,  decX + 15, decY + 5,   color);
+  matrix_m->DecDrawLine(5, 9,  10,4,   color);
+  matrix_m->DecDrawLine(9, 4,  16,4,   color);
+  matrix_m->DecDrawLine(16,1,  16,5,   color);
+  matrix_m->DecDrawLine(17,6,  18,9,   color);
+  matrix_m->DecDrawLine(5, 10, 11,10,  color);
+  matrix_m->DecDrawLine(7, 2,  10,9,   color);
+  matrix_m->DecDrawLine(11,9,  15,5,   color);
   //guidon
-  matrix_m->drawLine(decX + 16, decY + 1, decX + 18, decY + 1,   color);
+  matrix_m->DecDrawLine(16,1, 18,1,   color);
   // selle
-  matrix_m->drawLine(decX + 6, decY + 2, decX + 9, decY + 2,   color);
-  matrix_m->drawLine(decX + 8, decY + 3, decX + 8, decY + 6,   color);
+  matrix_m->DecDrawLine(6,2, 9,2,   color);
+  matrix_m->DecDrawLine(8,3, 8,6,   color);
 
   MyScreen::Update();
 }
@@ -249,34 +257,71 @@ void MyScreen::PrintCar(uint16_t color, int8_t decX, int8_t decY)
   MyScreen::Clear();
   
   //Glass of the Car
-  matrix_m->drawLine(decX + 16, decY + 5,  decX + 19, decY + 8,   color); 
-  matrix_m->drawLine(decX + 15, decY + 5,  decX + 18, decY + 8,   color); 
+  matrix_m->DecDrawLine(16,  5,  19, 8, color); 
+  matrix_m->DecDrawLine(15,  5,  18, 8, color); 
   // Car
-  matrix_m->drawLine(decX + 2, decY + 8,  decX + 8, decY + 8,   color); 
-  matrix_m->drawLine(decX + 1, decY + 9,  decX + 22, decY + 9,   color); 
-  matrix_m->drawLine(decX + 1, decY + 10,  decX + 24, decY + 10,   color); 
-  matrix_m->drawLine(decX + 1, decY + 11,  decX + 3, decY + 11,   color);   
-  matrix_m->drawLine(decX + 8, decY + 11,  decX + 16, decY + 11,   color);
-  matrix_m->drawLine(decX + 21, decY + 11,  decX + 25, decY + 11,   color); 
-  matrix_m->drawLine(decX + 1, decY + 12,  decX + 2, decY + 12,   color); 
-  matrix_m->drawLine(decX + 9, decY + 12,  decX + 15, decY + 12,   color); 
-  matrix_m->drawLine(decX + 22, decY + 12,  decX + 26, decY + 12,   color); 
-  matrix_m->drawLine(decX + 1, decY + 13,  decX + 2, decY + 13,   color); 
-  matrix_m->drawLine(decX + 9, decY + 13,  decX + 15, decY + 13,   color); 
-  matrix_m->drawLine(decX + 22, decY + 13,  decX + 26, decY + 13,   color); 
-  matrix_m->drawLine(decX + 2, decY + 14,  decX + 2, decY + 14,   color); 
-  matrix_m->drawLine(decX + 9, decY + 14,  decX + 15, decY + 14,   color); 
-  matrix_m->drawLine(decX + 22, decY + 14,  decX + 25, decY + 14,   color); 
-  // back wheel
-  matrix_m->drawLine(decX + 5, decY + 12,  decX + 6, decY + 12,   color);
-  matrix_m->drawLine(decX + 4, decY + 13,  decX + 7, decY + 13,   color);
-  matrix_m->drawLine(decX + 4, decY + 14,  decX + 7, decY + 14,   color);
-  matrix_m->drawLine(decX + 5, decY + 15,  decX + 6, decY + 15,   color);
-  // front wheel 
-  matrix_m->drawLine(decX + 18, decY + 12,  decX + 19, decY + 12,   color);
-  matrix_m->drawLine(decX + 17, decY + 13,  decX + 20, decY + 13,   color);
-  matrix_m->drawLine(decX + 17, decY + 14,  decX + 20, decY + 14,   color);
-  matrix_m->drawLine(decX + 18, decY + 15,  decX + 19, decY + 15,   color);
+  matrix_m->DecDrawLine( 2,  8,  8,  8, color); 
+  matrix_m->DecDrawLine( 1,  9, 22,  9, color); 
+  matrix_m->DecDrawLine( 1, 10, 24, 10, color); 
+  matrix_m->DecDrawLine( 1, 11,  3, 11, color);   
+  matrix_m->DecDrawLine( 8, 11, 16, 11, color);
+  matrix_m->DecDrawLine(21, 11, 25, 11, color); 
+  matrix_m->DecDrawLine( 1, 12,  2, 12, color); 
+  matrix_m->DecDrawLine( 9, 12, 15, 12, color); 
+  matrix_m->DecDrawLine(22, 12, 26, 12, color); 
+  matrix_m->DecDrawLine( 1, 13,  2, 13, color); 
+  matrix_m->DecDrawLine( 9, 13, 15, 13, color); 
+  matrix_m->DecDrawLine(22, 13, 26, 13, color); 
+  matrix_m->DecDrawLine( 2, 14,  2, 14, color); 
+  matrix_m->DecDrawLine( 9, 14, 15, 14, color); 
+  matrix_m->DecDrawLine(22, 14, 25, 14, color); 
+  // back whDecDrawLine
+  matrix_m->DecDrawLine( 5, 12,  6, 12, color);
+  matrix_m->DecDrawLine( 4, 13,  7, 13, color);
+  matrix_m->DecDrawLine( 4, 14,  7, 14, color);
+  matrix_m->DecDrawLine( 5, 15,  6, 15, color);
+  // front wDecDrawLine
+  matrix_m->DecDrawLine(18, 12, 19, 12, color);
+  matrix_m->DecDrawLine(17, 13, 20, 13, color);
+  matrix_m->DecDrawLine(17, 14, 20, 14, color);
+  matrix_m->DecDrawLine(18, 15, 19, 15, color);
+  MyScreen::Update();
+} 
+
+void MyScreen::PrintBmp(uint8_t type, uint16_t color, uint16_t colorBg, int8_t decX, int8_t decY)
+{
+  MyScreen::Clear();
+
+    /*!
+    @brief    Draw drawBitmap arguments explanation
+    @param    x   Top left corner x coordinate
+    @param    y   Top left corner y coordinate
+    @param    bitmap  byte array with monochrome bitmap
+    @param    w   Width of bitmap in pixels
+    @param    h   Height of bitmap in pixels
+    @param    color 16-bit 5-6-5 Color to draw pixels with
+    @param    bg 16-bit 5-6-5 Color to draw background with
+    */
+
+  switch (type)
+  {
+  case 0:
+    matrix_m->drawBitmap(decX, decY,  logo16_adafruit_bmp, 16, 16, color, colorBg);
+    break;
+  case 1:
+    matrix_m->drawBitmap(decX, decY,  logo16_check_pattern_bmp, 8, 32, color, colorBg);
+    matrix_m->drawBitmap(decX +  8, decY,  logo16_check_pattern_bmp, 8, 32, color, colorBg);
+    matrix_m->drawBitmap(decX + 16, decY,  logo16_check_pattern_bmp, 8, 32, color, colorBg);
+    matrix_m->drawBitmap(decX + 24, decY,  logo16_check_pattern_bmp, 8, 32, color, colorBg);
+    break;
+  
+  default:
+    break;
+  }
+
+  
+    
+
   MyScreen::Update();
 } 
 
