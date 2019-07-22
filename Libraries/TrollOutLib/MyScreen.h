@@ -6,6 +6,8 @@
 #ifndef MyScreen_h
 #define MyScreen_h
 
+#include <RGBmatrixPanel.h>
+
 // Color definitions in RGB 656 (http://www.barth-dev.de/online/rgb565-color-picker/)
 #define BLACK    0x0000
 #define BLUE     0x001F

@@ -7,10 +7,9 @@
 #include "MyTravel.h"
 
 
-MyTravel::MyTravel(String apiKey)
+MyTravel::MyTravel(WiFiClientSecure client, String apiKey):
+  api_m(apiKey, client)
 {
-  //Todo get key from arg
-
   //These are all optional (although departureTime needed for traffic)
   inputOptions_m.departureTime = "now"; //can also be a future timestamp
   inputOptions_m.trafficModel = "best_guess"; //Defaults to this anyways
@@ -31,7 +30,7 @@ void MyTravel::Init(String from, String to)
 // TODO return a struct with (timeInMinutes, DistanceInKmx10)
 String MyTravel::GetInfoByBike(void)
 {
-  uint8_t out;
+  String out;
 
   DirectionsResponse responseFinal;
   DirectionsResponse response;
@@ -42,19 +41,20 @@ String MyTravel::GetInfoByBike(void)
   if (millis() < (api_lasttime_m + api_mtbs_m))
   {
     // Wait request to be allowed
-    delay(500);
+    delay(api_mtbs_m);
   }
   else
   {
-    // Send request
-    response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
-    responseFinal = response;
-    response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
 
-    api_lasttime_m = millis();
   }
+    
+  // Send request
+  response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
+  responseFinal = response;
+  response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
 
-
+  api_lasttime_m = millis();
+  
   // Distance todo in struct
   //out = responseFinal.distance_value;
   // Time
@@ -69,7 +69,7 @@ String MyTravel::GetInfoByBike(void)
 
 String MyTravel::GetInfoByCar (void)
 {
-  uint8_t out;
+  String out;
 
   DirectionsResponse responseFinal;
   DirectionsResponse response;
@@ -80,18 +80,18 @@ String MyTravel::GetInfoByCar (void)
   if (millis() < (api_lasttime_m + api_mtbs_m))
   {
     // Wait request to be allowed
-    delay(500);
+    delay(api_mtbs_m);
   }
   else
   {
-    // Send request
-    response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
-    responseFinal = response;
-    response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
-
-    api_lasttime_m = millis();
+    
   }
+  // Send request
+  response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
+  responseFinal = response;
+  response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
 
+  api_lasttime_m = millis();
 
   // Distance todo in struct
   //out = responseFinal.distance_value;

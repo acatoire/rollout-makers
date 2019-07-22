@@ -5,8 +5,6 @@
 
 #include "Arduino.h"
 
-#include <RGBmatrixPanel.h>
-
 #include "MyScreen.h"
 
 MyScreen::MyScreen(void)
@@ -177,8 +175,32 @@ void MyScreen::PrintOoK(uint8_t type)
 
 }
 
+
+void MyScreen::PrintOoK_empty(uint16_t color)
+{
+
+  // Head : round rectangle
+  matrix_m->drawLine(8, 0, 24, 0,   color);
+  matrix_m->drawLine(24, 0, 26, 2,  color);
+  matrix_m->drawLine(26, 2, 26, 8,  color);
+  matrix_m->drawLine(26, 8, 24, 10, color);
+  matrix_m->drawLine(24, 10, 8, 10, color);
+  matrix_m->drawLine(8, 10, 6, 8,   color);
+  matrix_m->drawLine(6, 8, 6, 2,    color);
+  matrix_m->drawLine(6, 2, 8, 0,    color);
+
+  // Body: "K" rotated = 3 lines
+  matrix_m->drawLine(14, 12, 18, 12, color);
+  matrix_m->drawLine(16, 13, 14, 15, color);
+  matrix_m->drawLine(16, 13, 18, 15, color);
+
+}
+
+
 void MyScreen::PrintBike(uint16_t color)
 {
+  MyScreen::Clear();
+  
   //back wheel
   matrix_m->drawLine(3, 5, 6, 5,   color);  
   matrix_m->drawLine(6, 6, 7, 6,   color);
@@ -218,25 +240,8 @@ void MyScreen::PrintBike(uint16_t color)
   // selle
   matrix_m->drawLine(6, 2, 9, 2,   color);
   matrix_m->drawLine(8, 3, 8, 6,   color);
+
+  MyScreen::Update();
 }
 
-void MyScreen::PrintOoK_empty(uint16_t color)
-{
-
-// Head : round rectangle
-matrix_m->drawLine(8, 0, 24, 0,   color);
-matrix_m->drawLine(24, 0, 26, 2,  color);
-matrix_m->drawLine(26, 2, 26, 8,  color);
-matrix_m->drawLine(26, 8, 24, 10, color);
-matrix_m->drawLine(24, 10, 8, 10, color);
-matrix_m->drawLine(8, 10, 6, 8,   color);
-matrix_m->drawLine(6, 8, 6, 2,    color);
-matrix_m->drawLine(6, 2, 8, 0,    color);
-
-// Body: "K" rotated = 3 lines
-matrix_m->drawLine(14, 12, 18, 12, color);
-matrix_m->drawLine(16, 13, 14, 15, color);
-matrix_m->drawLine(16, 13, 18, 15, color);
-
-}
 
