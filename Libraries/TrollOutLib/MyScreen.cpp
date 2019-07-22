@@ -208,7 +208,7 @@ void MyScreen::PrintBike(uint16_t color)
   matrix_m->drawLine(9, 8, 9, 11,   color);
   matrix_m->drawLine(8, 11, 8, 12,   color);
   matrix_m->drawLine(6, 13, 7, 13,   color);
-  matrix_m->drawLine(3, 14, 7, 14,   color);
+  matrix_m->drawLine(3, 14, 6, 14,   color);
   matrix_m->drawLine(2, 13, 3, 13,   color);
   matrix_m->drawLine(1, 11, 1, 12,   color);
   matrix_m->drawLine(0, 8, 0, 11,   color);
@@ -221,7 +221,7 @@ void MyScreen::PrintBike(uint16_t color)
   matrix_m->drawLine(23, 8, 23, 11,   color);
   matrix_m->drawLine(22, 11, 22, 12,   color);
   matrix_m->drawLine(20, 13, 21, 13,   color);
-  matrix_m->drawLine(17, 14, 21, 14,   color);
+  matrix_m->drawLine(17, 14, 20, 14,   color);
   matrix_m->drawLine(16, 13, 17, 13,   color);
   matrix_m->drawLine(15, 11, 15, 12,   color);
   matrix_m->drawLine(14, 8, 14, 11,   color);
