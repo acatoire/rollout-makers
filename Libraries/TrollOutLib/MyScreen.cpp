@@ -99,7 +99,7 @@ void MyScreen::PrintOoK(uint8_t type)
   {
     case 0:
 
-      MyScreen::PrintOoK_empty(color_body);
+      MyScreen::TraceOoK_empty(color_body);
 
       // Draw small circle left
       matrix_m->drawRect(11, 5, 3, 3, color_body);
@@ -113,7 +113,7 @@ void MyScreen::PrintOoK(uint8_t type)
       
     case 1:
 
-      MyScreen::PrintOoK_empty(color_body);
+      MyScreen::TraceOoK_empty(color_body);
 
       // Draw small circle left
       matrix_m->drawRect(11, 5, 3, 3, color_body);
@@ -127,7 +127,7 @@ void MyScreen::PrintOoK(uint8_t type)
 
     case 2:
 
-        MyScreen::PrintOoK_empty(color_body);
+        MyScreen::TraceOoK_empty(color_body);
 
         // draw small red cross on left
         matrix_m->drawLine(11, 5, 13, 7, RED);
@@ -138,7 +138,7 @@ void MyScreen::PrintOoK(uint8_t type)
         break;
     case 3:
 
-        MyScreen::PrintOoK_empty(color_body);
+        MyScreen::TraceOoK_empty(color_body);
 
         // draw small red cross on left
         matrix_m->drawLine(11, 5, 13, 7, RED);
@@ -152,7 +152,7 @@ void MyScreen::PrintOoK(uint8_t type)
 
       case 4:
 
-        MyScreen::PrintOoK_empty(color_body);
+        MyScreen::TraceOoK_empty(color_body);
         // draw green tick on left
         matrix_m->drawLine(11, 6, 12, 7, GREEN);
         matrix_m->drawLine(12, 7, 14, 5,GREEN);
@@ -163,7 +163,7 @@ void MyScreen::PrintOoK(uint8_t type)
 
       case 5:
 
-        MyScreen::PrintOoK_empty(color_body);
+        MyScreen::TraceOoK_empty(color_body);
         // draw green tick on left
         matrix_m->drawLine(11, 6, 12, 7, GREEN);
         matrix_m->drawLine(12, 7, 14, 5, GREEN);

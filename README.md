@@ -10,8 +10,7 @@ Checkout the project from https://github.com/acatoire/rollout-makers
 The target board is node32s
 
 ## Needed arduino libraries ##
-From library manager, install:
-- Adafruit GFX Library
+All needed library are copied in the Libraries folder for quick setup
 
 
 ## Mounting project libraries ##

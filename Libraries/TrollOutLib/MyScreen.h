@@ -50,7 +50,7 @@ class MyScreen
 
 
     // Trace fuction do trace something but don't update the screen
-    void PrintOoK_empty(uint16_t color);
+    void TraceOoK_empty(uint16_t color);
 };
 #endif // MyValue_h
 

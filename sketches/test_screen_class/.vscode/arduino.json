@@ -2,6 +2,6 @@
     "board": "esp32:esp32:node32s",
     "configuration": "FlashFreq=80,UploadSpeed=921600",
     "port": "COM3",
-    "sketch": "test_screen_text.ino",
+    "sketch": "test_screen_class.ino",
     "output": "../build"
 }
