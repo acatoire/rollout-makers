@@ -177,6 +177,49 @@ void MyScreen::PrintOoK(uint8_t type)
 
 }
 
+void MyScreen::PrintBike(uint16_t color)
+{
+  //back wheel
+  matrix_m->drawLine(3, 5, 6, 5,   color);  
+  matrix_m->drawLine(6, 6, 7, 6,   color);
+  matrix_m->drawLine(8, 7, 8, 8,   color);
+  matrix_m->drawLine(9, 8, 9, 11,   color);
+  matrix_m->drawLine(8, 11, 8, 12,   color);
+  matrix_m->drawLine(6, 13, 7, 13,   color);
+  matrix_m->drawLine(3, 14, 7, 14,   color);
+  matrix_m->drawLine(2, 13, 3, 13,   color);
+  matrix_m->drawLine(1, 11, 1, 12,   color);
+  matrix_m->drawLine(0, 8, 0, 11,   color);
+  matrix_m->drawLine(1, 7, 1, 8,   color);
+  matrix_m->drawLine(2, 6, 3, 6,   color);
+  //Front wheel (x -> x+14)
+  matrix_m->drawLine(17, 5, 20, 5,   color);  
+  matrix_m->drawLine(20, 6, 21, 6,   color);
+  matrix_m->drawLine(22, 7, 22, 8,   color);
+  matrix_m->drawLine(23, 8, 23, 11,   color);
+  matrix_m->drawLine(22, 11, 22, 12,   color);
+  matrix_m->drawLine(20, 13, 21, 13,   color);
+  matrix_m->drawLine(17, 14, 21, 14,   color);
+  matrix_m->drawLine(16, 13, 17, 13,   color);
+  matrix_m->drawLine(15, 11, 15, 12,   color);
+  matrix_m->drawLine(14, 8, 14, 11,   color);
+  matrix_m->drawLine(15, 7, 15, 8,   color);
+  matrix_m->drawLine(16, 6, 17, 6,   color);
+  //Carter
+  matrix_m->drawLine(5, 9, 10, 4,   color);
+  matrix_m->drawLine(9, 4, 16, 4,   color);
+  matrix_m->drawLine(16, 1, 16, 5,   color);
+  matrix_m->drawLine(17, 6, 18, 9,   color);
+  matrix_m->drawLine(5, 10, 11, 10,   color);
+  matrix_m->drawLine(7, 2, 10, 9,   color);
+  matrix_m->drawLine(11, 9, 15, 5,   color);
+  //guidon
+  matrix_m->drawLine(16, 1, 18, 1,   color);
+  // selle
+  matrix_m->drawLine(6, 2, 9, 2,   color);
+  matrix_m->drawLine(8, 3, 8, 6,   color);
+}
+
 void MyScreen::PrintOoK_empty(uint16_t color)
 {
 
