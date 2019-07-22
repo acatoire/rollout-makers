@@ -3,12 +3,9 @@
         {
             "name": "Win32",
             "includePath": [
-                "C:\\Users\\axxca\\AppData\\Local\\Arduino15\\packages\\esp32\\tools\\**",
-                "C:\\Users\\axxca\\AppData\\Local\\Arduino15\\packages\\esp32\\hardware\\esp32\\1.0.2\\**",
-                "C:\\Users\\axxca\\Documents\\Arduino\\libraries\\RGB-matrix-Panel-master",
-                "C:\\Users\\axxca\\Documents\\Arduino\\libraries\\Adafruit_GFX_Library",
-                "C:\\Users\\axxca\\Documents\\Arduino\\libraries\\TrollOutLib",
-                "C:\\Users\\axxca\\Documents\\Arduino\\libraries\\GoogleMapsApi"
+                "${UserProfile}/AppData/Local/Arduino15/packages/esp32/tools/**",
+                "${UserProfile}/AppData/Local/Arduino15/packages/esp32/hardware/esp32/1.0.2/**",
+                "${UserProfile}/Documents/Arduino/libraries/**"
             ],
             "forcedInclude": [],
             "intelliSenseMode": "msvc-x64"
