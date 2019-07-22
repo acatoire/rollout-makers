@@ -37,6 +37,7 @@ class MyScreen
     void PrintTwoTimes(uint8_t minutesByBike, uint8_t minutesByCar);
 
     void PrintOoK(uint8_t type);
+    void PrintBike(uint16_t color);
   
   private:
     RGBmatrixPanel *matrix_m = new RGBmatrixPanel(_A, _B, _C, _CLK, _LAT, _OE, true, (uint8_t *)rgbpins);
