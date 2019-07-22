@@ -31,8 +31,12 @@ void setup()
 void loop() 
 {
 
-  screen.PrintBike(BLUE);
-  delay(5000); 
+  for(int8_t i = -26; i < 35; i++)
+  {
+    screen.PrintBike(BLUE, i, -(i/5-1));
+    delay(50); 
+  }
+
   //screen.PrintOoK(0);
   //delay(1000);  
   //screen.PrintOoK(1);
