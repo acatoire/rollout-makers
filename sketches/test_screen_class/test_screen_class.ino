@@ -57,7 +57,12 @@ void loop()
     screen.PrintBike(BLUE, i, 0);
     delay(50); 
   }
-
+  
+  for(i = -7; i < 24; i++)
+  {
+    screen.PrintStickMan(GREEN, i, 0);
+    delay(50); 
+  }
   //screen.PrintOoK(0);
   //delay(1000);  
   //screen.PrintOoK(1);
