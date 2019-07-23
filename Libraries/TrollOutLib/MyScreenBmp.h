@@ -43,8 +43,8 @@ static const unsigned char PROGMEM logo16_check_pattern_bmp[] =
   B10101010};
 
   // StickMan walking (7 frames)
-  // StickMan frame 1
-  static const unsigned char StickMan_1[] =
+  // StickMan frame 0
+  static const unsigned char StickMan_0[] =
 { B00011100,
   B00100010,
   B00100010,
@@ -61,8 +61,8 @@ static const unsigned char PROGMEM logo16_check_pattern_bmp[] =
   B00100010,
   B00100001,
   B01000001};
-// StickMan frame 2
-  static const unsigned char StickMan_2[] =
+// StickMan frame 1
+  static const unsigned char StickMan_1[] =
 { B00011100,
   B00100010,
   B00100010,
@@ -79,8 +79,8 @@ static const unsigned char PROGMEM logo16_check_pattern_bmp[] =
   B00010010,
   B00100010,
   B01000010};
-// StickMan frame 3
-  static const unsigned char StickMan_3[] =
+// StickMan frame 2
+  static const unsigned char StickMan_2[] =
 { B00011100,
   B00100010,
   B00100010,
@@ -97,8 +97,8 @@ static const unsigned char PROGMEM logo16_check_pattern_bmp[] =
   B00010100,
   B00100100,
   B00000100};
-// StickMan frame 4
-  static const unsigned char StickMan_4[] =
+// StickMan frame 3
+  static const unsigned char StickMan_3[] =
 { B00011100,
   B00100010,
   B00100010,
@@ -115,8 +115,8 @@ static const unsigned char PROGMEM logo16_check_pattern_bmp[] =
   B00011000,
   B00111000,
   B00001000};
-// StickMan frame 5
-  static const unsigned char StickMan_5[] =
+// StickMan frame 4
+  static const unsigned char StickMan_4[] =
 { B00011100,
   B00100010,
   B00100010,
@@ -133,8 +133,8 @@ static const unsigned char PROGMEM logo16_check_pattern_bmp[] =
   B00001100,
   B00010000,
   B00010000};
-// StickMan frame 6
-  static const unsigned char StickMan_6[] =
+// StickMan frame 5
+  static const unsigned char StickMan_5[] =
 { B00011100,
   B00100010,
   B00100010,
@@ -151,8 +151,8 @@ static const unsigned char PROGMEM logo16_check_pattern_bmp[] =
   B00010100,
   B00100100,
   B00100000};
-// StickMan frame 7
-  static const unsigned char StickMan_7[] =
+// StickMan frame 6
+  static const unsigned char StickMan_6[] =
 { B00011100,
   B00100010,
   B00100010,
