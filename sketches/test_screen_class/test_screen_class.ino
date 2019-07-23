@@ -31,38 +31,51 @@ void setup()
 void loop() 
 {
   int8_t i;
-
-  for(i = 0; i < 30; i++)
-  {
-    screen.PrintBmp(1, WHITE, RED, 0, 0);
-    delay(500); 
-    screen.PrintBmp(1, RED, WHITE, 0, 0);
-    delay(500); 
-  }
-
-  for(i = -26; i < 35; i++)
-  {
-    screen.PrintBmp(0, RED, WHITE, i, 0);
-    delay(50); 
-  }
-
-  for(i = -26; i < 35; i++)
-  {
-    screen.PrintCar(RED, i, -4);
-    delay(50); 
-  }
-
-  for(i = -26; i < 35; i++)
-  {
-    screen.PrintBike(BLUE, i, 0);
-    delay(50); 
-  }
   
-  for(i = -7; i < 24; i++)
+  for(i = -7; i < 32; i++)
   {
-    screen.PrintStickMan(GREEN, i, 0);
+    screen.Clear();
+    screen.PrintStickMan(i, GREEN, 0, i, 0);
+    screen.Update();
     delay(50); 
   }
+
+    
+  for(i = -7; i < 32; i++)
+  {
+    screen.Clear();
+    screen.PrintBmp(1, WHITE, RED, 0, 0);
+    screen.PrintStickMan2(i, GREEN, i, 0);
+    delay(50); 
+    screen.Update();
+  }
+
+  //for(i = 0; i < 10; i++)
+  //{
+  //  screen.PrintBmp(1, WHITE, RED, 0, 0);
+  //  delay(500); 
+  //  screen.PrintBmp(1, RED, WHITE, 0, 0);
+  //  delay(500); 
+  //}
+
+  //for(i = -26; i < 35; i++)
+  //{
+  //  screen.PrintBmp(0, RED, WHITE, i, 0);
+  //  delay(50); 
+  //}
+//
+  //for(i = -26; i < 35; i++)
+  //{
+  //  screen.PrintCar(RED, i, -4);
+  //  delay(50); 
+  //}
+//
+  //for(i = -26; i < 35; i++)
+  //{
+  //  screen.PrintBike(BLUE, i, 0);
+  //  delay(50); 
+  //}
+
   //screen.PrintOoK(0);
   //delay(1000);  
   //screen.PrintOoK(1);

@@ -45,6 +45,7 @@ class MyScreen
     void PrintCar(uint16_t color, int8_t decX, int8_t decY);
     void PrintBmp(uint8_t type, uint16_t color, uint16_t colorBg, int8_t decX, int8_t decY);
     void PrintStickMan(uint8_t frame, uint16_t color, uint16_t colorBg, int8_t decX, int8_t decY);
+    void PrintStickMan2(uint8_t frame, uint16_t color, int8_t decX, int8_t decY);
   
   private:
     RGBmatrixPanel *matrix_m = new RGBmatrixPanel(_A, _B, _C, _CLK, _LAT, _OE, true, (uint8_t *)rgbpins);
