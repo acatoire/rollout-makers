@@ -7,6 +7,7 @@
 #define MyScreen_h
 
 #include <RGBmatrixPanel.h>
+#include <MyScreenBmp.h>
 
 // Color definitions in RGB 656 (http://www.barth-dev.de/online/rgb565-color-picker/)
 #define BLACK    0x0000

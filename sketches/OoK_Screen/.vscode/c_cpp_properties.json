@@ -1,0 +1,15 @@
+{
+    "configurations": [
+        {
+            "name": "Win32",
+            "includePath": [
+                "${UserProfile}/AppData/Local/Arduino15/packages/esp32/tools/**",
+                "${UserProfile}/AppData/Local/Arduino15/packages/esp32/hardware/esp32/1.0.2/**",
+                "${UserProfile}/Documents/Arduino/libraries/**"
+            ],
+            "forcedInclude": [],
+            "intelliSenseMode": "msvc-x64"
+        }
+    ],
+    "version": 4
+}
