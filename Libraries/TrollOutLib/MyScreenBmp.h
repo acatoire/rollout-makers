@@ -170,4 +170,24 @@ static const unsigned char PROGMEM logo16_check_pattern_bmp[] =
   B01000010,
   B01000000};
 
+// train
+static const unsigned char train_bmp[] =
+{ B, B, B,
+  B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+ B, B, B,
+};
+
   #endif //_BMP_H
