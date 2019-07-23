@@ -325,3 +325,47 @@ void MyScreen::PrintBmp(uint8_t type, uint16_t color, uint16_t colorBg, int8_t d
   MyScreen::Update();
 } 
 
+void MyScreen::PrintStickMan(uint8_t frame, uint16_t color, uint16_t colorBg, int8_t decX, int8_t decY)
+{
+  MyScreen::Clear();
+
+    /*!
+    @brief    Draw drawBitmap arguments explanation
+    @param    frame   Select 1 of the 7 frames for StickMan walking
+    @param    color 16-bit 5-6-5 Color to draw pixels with
+    @param    bg 16-bit 5-6-5 Color to draw background with
+    */
+
+  switch (frame)
+  {
+  case 0:
+    matrix_m->drawBitmap(decX, decY,  StickMan_0, 8, 16, color, colorBg);
+    break;
+  case 1:
+    matrix_m->drawBitmap(decX, decY,  StickMan_1, 8, 16, color, colorBg);
+    break;
+  case 2:
+      matrix_m->drawBitmap(decX, decY,  StickMan_2, 8, 16, color, colorBg);
+      break;
+  case 3:
+      matrix_m->drawBitmap(decX, decY,  StickMan_3, 8, 16, color, colorBg);
+      break;
+  case 4:
+      matrix_m->drawBitmap(decX, decY,  StickMan_4, 8, 16, color, colorBg);
+      break;
+   case 5:
+      matrix_m->drawBitmap(decX, decY,  StickMan_5, 8, 16, color, colorBg);
+      break;
+   case 6:
+      matrix_m->drawBitmap(decX, decY,  StickMan_6, 8, 16, color, colorBg);
+      break;
+      
+  default:
+    break;
+  }
+
+  
+    
+
+  MyScreen::Update();
+} 
