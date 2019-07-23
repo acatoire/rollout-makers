@@ -35,7 +35,7 @@ void loop()
   for(i = -7; i < 32; i++)
   {
     screen.Clear();
-    screen.PrintStickMan(i, GREEN, 0, i, 0);
+    screen.PrintStickMan(i, GREEN, i, 0);
     screen.Update();
     delay(50); 
   }
@@ -44,8 +44,9 @@ void loop()
   for(i = -7; i < 32; i++)
   {
     screen.Clear();
-    screen.PrintBmp(1, WHITE, RED, 0, 0);
-    screen.PrintStickMan2(i, GREEN, i, 0);
+    screen.PrintFull(WHITE);
+    screen.PrintBmp(1, RED, 0, 0);
+    screen.PrintStickMan(i, GREEN, i, 0);
     delay(50); 
     screen.Update();
   }

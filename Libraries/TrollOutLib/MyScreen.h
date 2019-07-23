@@ -36,23 +36,22 @@ class MyScreen
     void Clear(void);
     void Update(void);
 
-    // Print fuction do clear, trace then update the screen
+    void PrintFull(uint16_t color);
     void PrintFull(uint8_t R, uint8_t G, uint8_t B);
     void PrintTwoTimes(uint8_t minutesByBike, uint8_t minutesByCar);
 
+    void PrintOoK_empty(uint16_t color);
     void PrintOoK(uint8_t type);
     void PrintBike(uint16_t color, int8_t decX, int8_t decY);
     void PrintCar(uint16_t color, int8_t decX, int8_t decY);
-    void PrintBmp(uint8_t type, uint16_t color, uint16_t colorBg, int8_t decX, int8_t decY);
-    void PrintStickMan(uint8_t frame, uint16_t color, uint16_t colorBg, int8_t decX, int8_t decY);
-    void PrintStickMan2(uint8_t frame, uint16_t color, int8_t decX, int8_t decY);
+    void PrintBmp(uint8_t type, uint16_t color, int8_t decX, int8_t decY);
+    void PrintStickMan(uint8_t frame, uint16_t color, int8_t decX, int8_t decY);
   
   private:
     RGBmatrixPanel *matrix_m = new RGBmatrixPanel(_A, _B, _C, _CLK, _LAT, _OE, true, (uint8_t *)rgbpins);
 
 
-    // Trace fuction do trace something but don't update the screen
-    void TraceOoK_empty(uint16_t color);
+
 };
 #endif // MyValue_h
 

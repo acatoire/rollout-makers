@@ -45,13 +45,17 @@ void MyScreen::Update(void)
 
 }
 
+void MyScreen::PrintFull(uint16_t color)
+{
+
+  matrix_m->fillScreen(color);
+
+}
 
 void MyScreen::PrintFull(uint8_t R, uint8_t G, uint8_t B)
 {
 
   matrix_m->fillScreen(matrix_m->Color333(R, G, B));
-
-  MyScreen::Update();
 
 }
 
@@ -92,14 +96,11 @@ void MyScreen::PrintOoK(uint8_t type)
 
   color_body = WHITE;
 
-
-  MyScreen::Clear();
-
   switch(type)
   {
     case 0:
 
-      MyScreen::TraceOoK_empty(color_body);
+      MyScreen::PrintOoK_empty(color_body);
 
       // Draw small circle left
       matrix_m->drawRect(11, 5, 3, 3, color_body);
@@ -113,7 +114,7 @@ void MyScreen::PrintOoK(uint8_t type)
       
     case 1:
 
-      MyScreen::TraceOoK_empty(color_body);
+      MyScreen::PrintOoK_empty(color_body);
 
       // Draw small circle left
       matrix_m->drawRect(11, 5, 3, 3, color_body);
@@ -127,7 +128,7 @@ void MyScreen::PrintOoK(uint8_t type)
 
     case 2:
 
-        MyScreen::TraceOoK_empty(color_body);
+        MyScreen::PrintOoK_empty(color_body);
 
         // draw small red cross on left
         matrix_m->drawLine(11, 5, 13, 7, RED);
@@ -138,7 +139,7 @@ void MyScreen::PrintOoK(uint8_t type)
         break;
     case 3:
 
-        MyScreen::TraceOoK_empty(color_body);
+        MyScreen::PrintOoK_empty(color_body);
 
         // draw small red cross on left
         matrix_m->drawLine(11, 5, 13, 7, RED);
@@ -152,7 +153,7 @@ void MyScreen::PrintOoK(uint8_t type)
 
       case 4:
 
-        MyScreen::TraceOoK_empty(color_body);
+        MyScreen::PrintOoK_empty(color_body);
         // draw green tick on left
         matrix_m->drawLine(11, 6, 12, 7, GREEN);
         matrix_m->drawLine(12, 7, 14, 5,GREEN);
@@ -163,7 +164,7 @@ void MyScreen::PrintOoK(uint8_t type)
 
       case 5:
 
-        MyScreen::TraceOoK_empty(color_body);
+        MyScreen::PrintOoK_empty(color_body);
         // draw green tick on left
         matrix_m->drawLine(11, 6, 12, 7, GREEN);
         matrix_m->drawLine(12, 7, 14, 5, GREEN);
@@ -179,12 +180,10 @@ void MyScreen::PrintOoK(uint8_t type)
       break;
   }
 
-  MyScreen::Update();
-
 }
 
 
-void MyScreen::TraceOoK_empty(uint16_t color)
+void MyScreen::PrintOoK_empty(uint16_t color)
 {
 
   // Head : round rectangle
@@ -207,7 +206,6 @@ void MyScreen::TraceOoK_empty(uint16_t color)
 
 void MyScreen::PrintBike(uint16_t color, int8_t decX, int8_t decY)
 {
-  MyScreen::Clear();
   
   //back wheel
   matrix_m->DecDrawLine(3,  5, 6, 5, color);  
@@ -249,12 +247,10 @@ void MyScreen::PrintBike(uint16_t color, int8_t decX, int8_t decY)
   matrix_m->DecDrawLine(6,2, 9,2,   color);
   matrix_m->DecDrawLine(8,3, 8,6,   color);
 
-  MyScreen::Update();
 }
 
 void MyScreen::PrintCar(uint16_t color, int8_t decX, int8_t decY)
 {
-  MyScreen::Clear();
   
   //Glass of the Car
   matrix_m->DecDrawLine(16,  5,  19, 8, color); 
@@ -285,13 +281,11 @@ void MyScreen::PrintCar(uint16_t color, int8_t decX, int8_t decY)
   matrix_m->DecDrawLine(17, 13, 20, 13, color);
   matrix_m->DecDrawLine(17, 14, 20, 14, color);
   matrix_m->DecDrawLine(18, 15, 19, 15, color);
-  MyScreen::Update();
+
 } 
 
-void MyScreen::PrintBmp(uint8_t type, uint16_t color, uint16_t colorBg, int8_t decX, int8_t decY)
+void MyScreen::PrintBmp(uint8_t type, uint16_t color, int8_t decX, int8_t decY)
 {
-  //MyScreen::Clear();
-
     /*!
     @brief    Draw drawBitmap arguments explanation
     @param    x   Top left corner x coordinate
@@ -306,71 +300,29 @@ void MyScreen::PrintBmp(uint8_t type, uint16_t color, uint16_t colorBg, int8_t d
   switch (type)
   {
   case 0:
-    matrix_m->drawBitmap(decX, decY,  logo16_adafruit_bmp, 16, 16, color, colorBg);
+    matrix_m->drawBitmap(decX, decY,  logo16_adafruit_bmp, 16, 16, color);
     break;
   case 1:
-    matrix_m->drawBitmap(decX, decY,  logo16_check_pattern_bmp, 8, 32, color, colorBg);
-    matrix_m->drawBitmap(decX +  8, decY,  logo16_check_pattern_bmp, 8, 32, color, colorBg);
-    matrix_m->drawBitmap(decX + 16, decY,  logo16_check_pattern_bmp, 8, 32, color, colorBg);
-    matrix_m->drawBitmap(decX + 24, decY,  logo16_check_pattern_bmp, 8, 32, color, colorBg);
+    matrix_m->drawBitmap(decX, decY,  logo16_check_pattern_bmp, 8, 32, color);
+    matrix_m->drawBitmap(decX +  8, decY,  logo16_check_pattern_bmp, 8, 32, color);
+    matrix_m->drawBitmap(decX + 16, decY,  logo16_check_pattern_bmp, 8, 32, color);
+    matrix_m->drawBitmap(decX + 24, decY,  logo16_check_pattern_bmp, 8, 32, color);
     break;
   
   default:
     break;
   }
 
-  
-    
-
-  //MyScreen::Update();
 } 
 
-void MyScreen::PrintStickMan(uint8_t frame, uint16_t color, uint16_t colorBg, int8_t decX, int8_t decY)
+void MyScreen::PrintStickMan(uint8_t frame, uint16_t color, int8_t decX, int8_t decY)
 {
-    /*!
-    @brief    Draw drawBitmap arguments explanation
-    @param    frame   Select 1 of the 7 frames for StickMan walking
-    @param    color 16-bit 5-6-5 Color to draw pixels with
-    @param    bg 16-bit 5-6-5 Color to draw background with
-    */
-
-  switch (frame % 7)
-  {
-  case 0:
-    matrix_m->drawBitmap(decX, decY,  StickMan_0, 8, 16, color, colorBg);
-    break;
-  case 1:
-    matrix_m->drawBitmap(decX, decY,  StickMan_1, 8, 16, color, colorBg);
-    break;
-  case 2:
-      matrix_m->drawBitmap(decX, decY,  StickMan_2, 8, 16, color, colorBg);
-      break;
-  case 3:
-      matrix_m->drawBitmap(decX, decY,  StickMan_3, 8, 16, color, colorBg);
-      break;
-  case 4:
-      matrix_m->drawBitmap(decX, decY,  StickMan_4, 8, 16, color, colorBg);
-      break;
-   case 5:
-      matrix_m->drawBitmap(decX, decY,  StickMan_5, 8, 16, color, colorBg);
-      break;
-   case 6:
-      matrix_m->drawBitmap(decX, decY,  StickMan_6, 8, 16, color, colorBg);
-      break;
-      
-  default:
-    break;
-  }
-}
-
-void MyScreen::PrintStickMan2(uint8_t frame, uint16_t color, int8_t decX, int8_t decY)
-{
-    /*!
-    @brief    Draw drawBitmap arguments explanation
-    @param    frame   Select 1 of the 7 frames for StickMan walking
-    @param    color 16-bit 5-6-5 Color to draw pixels with
-    @param    bg 16-bit 5-6-5 Color to draw background with
-    */
+  /*!
+  @brief    Draw drawBitmap arguments explanation
+  @param    frame   Select 1 of the 7 frames for StickMan walking
+  @param    color 16-bit 5-6-5 Color to draw pixels with
+  @param    bg 16-bit 5-6-5 Color to draw background with
+  */
 
   switch (frame % 7)
   {
