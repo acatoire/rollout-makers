@@ -14,8 +14,8 @@
 
 void wifiConnect(void);
 
-int GetTimeByBike(void);
-int GetTimeByCar(void);
+String GetTimeByBike(void);
+String GetTimeByCar(void);
 
 // Global declaration
 const int led = 13;
@@ -66,13 +66,13 @@ void loop(void)
 
     time = GetTimeByBike();
     Serial.printf("Time by bike:");
-    Serial.printf(time);
+    Serial.println(time);
 
     sleep(10);
 
     time = GetTimeByCar();
     Serial.printf("Time by car:");
-    Serial.printf(time);
+    Serial.println(time);
   }
 
 }
@@ -107,7 +107,7 @@ void wifiConnect(void)
 
 String GetTimeByCar(void)
 {
-  uint8_t out;
+  String out;
 
   DirectionsResponse responseCar;
   DirectionsResponse response;
@@ -130,7 +130,7 @@ String GetTimeByCar(void)
 
 String GetTimeByBike(void)
 {
-  uint8_t out;
+  String out;
 
   DirectionsResponse responseBicycling;
   DirectionsResponse response;
