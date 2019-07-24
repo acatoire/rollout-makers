@@ -17,7 +17,7 @@
 class MyTravel
 {
   public:
-    MyTravel(WiFiClientSecure client, String apiKey);
+    MyTravel(WiFiClientSecure &client, String apiKey);
     void   Init(String from, String to);
     String GetInfoByBike(void);
     String GetInfoByCar (void);
@@ -28,8 +28,12 @@ class MyTravel
     // Default value, replaced by Init()
     String origin_m       = "143 Boulevard Robert Schuman, Nantes";
     String destination_m  = "17 Rue de la Petite Baratte, 44315 Nantes";
+	
+	//flag for refresh
+	bool bikeRefreshFlag_m;
+	bool carRefreshFlag_m;
 
-    GoogleMapsDirectionsApi api_m; //todo creat in constructor
+    GoogleMapsDirectionsApi api_m; //todo create in constructor
 
     DirectionsInputOptions inputOptions_m;
 

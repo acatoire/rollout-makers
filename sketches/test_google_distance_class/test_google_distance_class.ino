@@ -46,8 +46,6 @@ void loop(void)
     time = travel.GetInfoByBike();
     Serial.printf("Time by bike: %d", time);
 
-    delay(10000);
-
     time = travel.GetInfoByCar();
     Serial.printf("Time by car: %d", time);
   }
