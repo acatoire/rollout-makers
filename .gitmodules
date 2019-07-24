@@ -10,3 +10,6 @@
 [submodule "Externals Libraries/Blynk"]
 	path = Externals Libraries/Blynk
 	url = https://github.com/blynkkk/blynk-library
+[submodule "App/PythonClient/Modules/blynk-library-python"]
+	path = App/PythonClient/Modules/blynk-library-python
+	url = https://github.com/vshymanskyy/blynk-library-python
