@@ -71,24 +71,26 @@ void DirectionsListener::value(String value) {
   } else if (depthFromLegsKey == 2) {
     if (currentParent == "distance") {
       if (currentKey == "text") {
-		  Serial.println("distance value is " + value);
+		  //Serial.println("distance value is " + value);
         responseObject.distance_text = value;
       } else if (currentKey == "value") {
         responseObject.distance_value = value.toInt();
       }
     } else if (currentParent == "duration") {
       if (currentKey == "text") {
-		Serial.println("duration value is " + value);
+		//Serial.println("duration value is " + value);
         responseObject.duration_text = value;
       } else if (currentKey == "value") {
         responseObject.duration_value = value.toInt();
+		//Serial.println("duration value is " + value);
       }
     } else if (currentParent == "duration_in_traffic") {
       if (currentKey == "text") {
-		  		Serial.println("duration in trafic value is " + value);
+		  		//Serial.println("duration in trafic value is " + value);
         responseObject.durationTraffic_text = value;
       } else if (currentKey == "value") {
         responseObject.durationTraffic_value = value.toInt();
+		//Serial.println("duration in trafic value is " + value);
       }
     }
   }
@@ -184,7 +186,7 @@ GoogleMapsDirectionsApi::GoogleMapsDirectionsApi(String apiKey,
 
 DirectionsResponse GoogleMapsDirectionsApi::sendGetToGoogleMapsDirections(
     String command) {
-  Serial.println("starting sendGet function");
+  //Serial.println("starting sendGet function");
   JsonStreamingParser parser;
   DirectionsListener listener;
   responseObject = DirectionsResponse();

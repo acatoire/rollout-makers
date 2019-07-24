@@ -30,7 +30,7 @@ void MyTravel::Init(String from, String to)
 }
 
 // TODO return a struct with (timeInMinutes, DistanceInKmx10)
-String MyTravel::GetInfoByBike(void)
+String MyTravel::GetDurationByBike(void)
 {
   String out;
   DirectionsResponse responseFinal;
@@ -59,23 +59,46 @@ String MyTravel::GetInfoByBike(void)
        //nothing to do
   }
 
-
+}
   
-  // Distance todo in struct
-  //out = responseFinal.distance_value;
-  // Time
-  // out = responseFinal.duration_value;// TODO see why strange value in int
+// TODO return a struct with (timeInMinutes, DistanceInKmx10)
+DirectionsResponse MyTravel::GetInfoByBike(void)
+{
+  String out;
+  DirectionsResponse responseFinal;
+  DirectionsResponse response;
 
-  out = responseFinal.duration_text; 
+  inputOptions_m.travelMode = "bicycling";
+  inputOptions_m.trafficModel = "";
+
+  Serial.println("start bike request ");
+  if(bikeRefreshFlag_m == true)
+  {
+	  // Send request
+      response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
+      responseFinal = response;
+      response = api_m.directionsApi(origin_m, destination_m, inputOptions_m); 
+	  bikeRefreshFlag_m = false;
+	  api_lasttime_m = millis();
+  }
+  else if (millis() > (api_lasttime_m + api_mtbs_m))
+  {
+	  //next request is allowed
+	  bikeRefreshFlag_m = true;
+  }
+  else
+  {
+       //nothing to do
+  }
   
-    Serial.print("end bike request ");
-
-  return out;
+    Serial.println("end bike request ");
+    responseFinal = ConvertValueintoMinutesAndKilometers(responseFinal);
+  return responseFinal;
 
 }
 
 
-String MyTravel::GetInfoByCar (void)
+String MyTravel::GetDurationByCar (void)
 {
   String out;
 
@@ -85,7 +108,6 @@ String MyTravel::GetInfoByCar (void)
   inputOptions_m.travelMode = "driving"; 
   inputOptions_m.trafficModel = "best_guess";
 
-  Serial.print("start car request ");
   if(carRefreshFlag_m == true)
   {
 	  // Send request
@@ -105,24 +127,77 @@ String MyTravel::GetInfoByCar (void)
   {
        //nothing to do
   }
-
-
-  // Distance todo in struct
-  //out = responseFinal.distance_value;
-  // Time
-  // out = responseFinal.duration_value;// TODO see why strange value in int
   
-  Serial.print("end car request ");
   out = responseFinal.duration_text; 
 
   return out;
 }
 
 
+DirectionsResponse MyTravel::GetInfoByCar (void)
+{
+  String out;
+
+  DirectionsResponse responseFinal;
+  DirectionsResponse response;
+
+  inputOptions_m.travelMode = "driving"; 
+  inputOptions_m.trafficModel = "best_guess";
+
+  if(carRefreshFlag_m == true)
+  {
+	  // Send request
+      response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
+      responseFinal = response;
+      response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
+
+      api_lasttime_m = millis();
+	  carRefreshFlag_m = false;
+  }
+  else if (millis() > (api_lasttime_m + api_mtbs_m))
+  {
+	  //next request is allowed
+	  carRefreshFlag_m = true;
+  }
+  else
+  {
+       //nothing to do
+  }
+  
+  responseFinal = ConvertValueintoMinutesAndKilometers(responseFinal);
+  return responseFinal;
+}
+
 uint8_t MyTravel::GetInfo (uint8_t type)
 {
   // todo common code between bike and car
 }
 
+DirectionsResponse MyTravel::ConvertValueintoMinutesAndKilometers(DirectionsResponse info)
+{
+  info.distance_value = info.distance_value/100; //convert meters into kilometers/10
+  
+  info.duration_value = info.duration_value/60; // convert second into minutes
+
+  if(info.duration_value%60>=30)//round the value
+  {
+	  info.duration_value++;
+  }
+  else
+  {
+	  //nothing to do
+  }
+  info.durationTraffic_value = info.durationTraffic_value/60; // convert second into minutes
+  if(info.durationTraffic_value%60>=30)//round the value
+  {
+	  info.durationTraffic_value++;
+  }
+  else
+  {
+	  //nothing to do
+  } 
+  return info;
+
+}
 
 

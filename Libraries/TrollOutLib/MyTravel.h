@@ -19,15 +19,19 @@ class MyTravel
   public:
     MyTravel(WiFiClientSecure &client, String apiKey);
     void   Init(String from, String to);
-    String GetInfoByBike(void);
-    String GetInfoByCar (void);
+    String GetDurationByBike(void);
+    String GetDurationByCar (void);
+	DirectionsResponse GetInfoByBike(void);
+    DirectionsResponse GetInfoByCar (void);
   
   private:
     uint8_t GetInfo (uint8_t type);
+	DirectionsResponse ConvertValueintoMinutesAndKilometers(DirectionsResponse info);
 
     // Default value, replaced by Init()
     String origin_m       = "143 Boulevard Robert Schuman, Nantes";
     String destination_m  = "17 Rue de la Petite Baratte, 44315 Nantes";
+
 	
 	//flag for refresh
 	bool bikeRefreshFlag_m;

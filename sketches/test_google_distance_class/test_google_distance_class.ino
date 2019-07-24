@@ -37,17 +37,21 @@ void setup(void)
 
 void loop(void) 
 {
-  String time;
+  DirectionsResponse info;
 
   if(firstTime)
   {
     firstTime = false;
 
-    time = travel.GetInfoByBike();
-    Serial.printf("Time by bike: %d", time);
-
-    time = travel.GetInfoByCar();
-    Serial.printf("Time by car: %d", time);
+    info = travel.GetInfoByBike();
+    Serial.println("Time by bike: (string)" + info.duration_text);
+    Serial.println("Distance by bike: " + info.distance_text);
+    Serial.println(info.duration_value);
+    
+    info = travel.GetInfoByCar();
+    Serial.println("Time by car: " + info.durationTraffic_text);
+    Serial.println("Distance by car: " + info.distance_text);
+    Serial.println(info.durationTraffic_value);
   }
 
 }
