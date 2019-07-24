@@ -11,7 +11,7 @@
 
 // Macros
 #define DecDrawLine(A, B, C, D, E) drawLine(decX + A, decY + B, decX + C, decY + D, E)
-#define DecDrawRect(A, B, C, D, E) drawRect(decX + A, decY + B, C, D, E);
+#define DecFillRect(A, B, C, D, E) fillRect(decX + A, decY + B, C, D, E);
 
 
 
@@ -380,34 +380,34 @@ void MyScreen::PrintStickMan(uint8_t frame, uint16_t color, int8_t decX, int8_t 
 		matrix_m->DecDrawLine(2, 13, 8, 13, 0xF800); 
 		break;
 	case 1:
-		matrix_m->DecDrawRect(2, 13-level, 7, 1+level, 0xF980); 
+		matrix_m->DecFillRect(2, 13-level, 7, 1+level, 0xF980); 
 		break;
 	case 2:
-		matrix_m->DecDrawRect(2, 13-level, 7, 1+level, 0xFA40); 
+		matrix_m->DecFillRect(2, 13-level, 7, 1+level, 0xFA40); 
 		break;
 	case 3:
-		matrix_m->DecDrawRect(2, 13-level, 7, 1+level, 0xFB40); 
+		matrix_m->DecFillRect(2, 13-level, 7, 1+level, 0xFB40); 
 		break;
 	case 4:
-		matrix_m->DecDrawRect(2, 13-level, 7, 1+level, 0xFD00); 
+		matrix_m->DecFillRect(2, 13-level, 7, 1+level, 0xFD00); 
 		break;
 	case 5:
-		matrix_m->DecDrawRect(2, 13-level, 7, 1+level, 0xFF20); 
+		matrix_m->DecFillRect(2, 13-level, 7, 1+level, 0xFF20); 
 		break;
 	case 6:
-		matrix_m->DecDrawRect(2, 13-level, 7, 1+level, 0xDF60); 
+		matrix_m->DecFillRect(2, 13-level, 7, 1+level, 0xDF60); 
 		break;
     case 7:
-		matrix_m->DecDrawRect(2, 13-level, 7, 1+level, 0x9F40); 
+		matrix_m->DecFillRect(2, 13-level, 7, 1+level, 0x9F40); 
 		break;
 	case 8:
-		matrix_m->DecDrawRect(2, 13-level, 7, 1+level, 0x7741); 
+		matrix_m->DecFillRect(2, 13-level, 7, 1+level, 0x7741); 
 		break;
 	case 9:
-		matrix_m->DecDrawRect(2, 13-level, 7, 1+level, 0x4FE0); 
+		matrix_m->DecFillRect(2, 13-level, 7, 1+level, 0x4FE0); 
 		break;
 	case 10:
-		matrix_m->DecDrawRect(2, 13-level, 7, 1+level, 0x07E0); 
+		matrix_m->DecFillRect(2, 13-level, 7, 1+level, 0x07E0); 
 		break;	
   default:
     break;
