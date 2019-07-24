@@ -354,5 +354,63 @@ void MyScreen::PrintStickMan(uint8_t frame, uint16_t color, int8_t decX, int8_t 
   default:
     break;
   }
+ }
+  void MyScreen::PrintBattery(uint8_t percentage, uint16_t shape_color, int8_t decX, int8_t decY)
+{
+  /*!
+  @brief    Draw drawBitmap arguments explanation
+  @param    percentage   value of ho is filled the battery (100% = full)
+  @param    shape_color 16-bit 5-6-5 Color to draw shape with
+  @param    decX, decY : offset of the position of the drawing
+  */
+  uint8_t formated_percentage;
+  uint8_t level;
+  if(percentage > 100) formated_percentage = 100;
+  else formated_percentage = percentage;
+
+  level = formated_percentage / 10;
+  
+  // Display external shape of the battery
+  matrix_m->drawBitmap(decX, decY,  Battery_bmp, 16, 16, shape_color);
+  
+  // Display level of the battery 
+  switch (level)
+  {
+	case 0:
+		matrix_m->DecDrawLine(2, 13, 8, 13, 0xF800); 
+		break;
+	case 1:
+		matrix_m->DecDrawLine(2, 12, 8, 12, 0xF980); 
+		break;
+	case 2:
+		matrix_m->DecDrawLine(2, 11, 8, 11, 0xFA40); 
+		break;
+	case 3:
+		matrix_m->DecDrawLine(2, 10, 8, 10, 0xFB40); 
+		break;
+	case 4:
+		matrix_m->DecDrawLine(2, 9, 8, 9, 0xFD00); 
+		break;
+	case 5:
+		matrix_m->DecDrawLine(2, 8, 8, 8, 0xFF20); 
+		break;
+	case 6:
+		matrix_m->DecDrawLine(2, 7, 8, 7, 0xDF60); 
+		break;
+    case 7:
+		matrix_m->DecDrawLine(2, 6, 8, 6, 0x9F40); 
+		break;
+	case 8:
+		matrix_m->DecDrawLine(2, 5, 8, 5, 0x7741); 
+		break;
+	case 9:
+		matrix_m->DecDrawLine(2, 4, 8, 4, 0x4FE0); 
+		break;
+	case 10:
+		matrix_m->DecDrawLine(2, 3, 8, 3, 0x07E0); 
+		break;	
+  default:
+    break;
+  }
 
 } 

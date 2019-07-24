@@ -31,6 +31,7 @@ void setup()
 void loop() 
 {
   int8_t i;
+  uint8_t j;
   
   for(i = -7; i < 32; i++)
   {
@@ -50,6 +51,14 @@ void loop()
     delay(50); 
     screen.Update();
   }
+/*
+  for(j = 0; j<100;i++)
+  {
+    screen.Clear();
+    screen.PrintBattery(j, WHITE, 0, 0);
+    delay(50); 
+    screen.Update();
+  }*/
 
   //for(i = 0; i < 10; i++)
   //{
@@ -99,4 +108,3 @@ void loop()
   //delay(1000);
 
 }
-
