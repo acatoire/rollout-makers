@@ -51,14 +51,14 @@ void loop()
     delay(50); 
     screen.Update();
   }
-/*
-  for(j = 0; j<100;i++)
+
+  for(j = 0; j<100;j++)
   {
     screen.Clear();
     screen.PrintBattery(j, WHITE, 0, 0);
     delay(50); 
     screen.Update();
-  }*/
+  }
 
   //for(i = 0; i < 10; i++)
   //{
