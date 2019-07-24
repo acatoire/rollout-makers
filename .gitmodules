@@ -1,0 +1,12 @@
+[submodule "Externals Libraries/blynk-library"]
+	path = Externals Libraries/blynk-library
+	url = https://github.com/blynkkk/blynk-library
+[submodule "Externals Libraries/Adafruit-GFX-Library"]
+	path = Externals Libraries/Adafruit-GFX-Library
+	url = https://github.com/adafruit/Adafruit-GFX-Library
+[submodule "Externals Libraries/json-streaming-parser"]
+	path = Externals Libraries/json-streaming-parser
+	url = https://github.com/squix78/json-streaming-parser
+[submodule "Externals Libraries/RGB-matrix-Panel"]
+	path = Externals Libraries/RGB-matrix-Panel
+	url = https://github.com/adafruit/RGB-matrix-Panel
