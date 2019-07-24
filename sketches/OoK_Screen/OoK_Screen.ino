@@ -22,7 +22,8 @@ char blynkAuth[] = "xbzggg5NU6Ye9G4XD6utHK6l_3nqb5Lr";
 int8_t coorX = -7;
 bool newValue = false;
 uint8_t buttonValue = 0;
-uint8_t sliderValue = 0;
+uint8_t stepValue = 0;
+uint8_t valueDisplay = 0;
 uint8_t dropMenuValue = 0;
 
 BlynkTimer timer;
@@ -43,10 +44,21 @@ BLYNK_WRITE(V2)
 // in Blynk app writes values to the Virtual Pin 1
 BLYNK_WRITE(V1)
 {
-  sliderValue = param.asInt(); 
+  stepValue = param.asInt(); 
   newValue = true;
-  Serial.print("Slider value is: ");
-  Serial.println(sliderValue);
+  Serial.print("Step value is: ");
+  Serial.println(stepValue);
+  
+}
+
+// This function will be called every time Slider Widget
+// in Blynk app writes values to the Virtual Pin 1
+BLYNK_WRITE(V3)
+{
+  valueDisplay = param.asInt(); 
+  newValue = true;
+  Serial.print("ValueDisplay value is: ");
+  Serial.println(valueDisplay);
   
 }
 
@@ -76,7 +88,7 @@ void screenUpdate()
 {
 
   screen.Clear();
-  switch (sliderValue)
+  switch (stepValue)
   {
   case 0:
   case 1:
@@ -84,7 +96,7 @@ void screenUpdate()
   case 3:
   case 4:
   case 5:
-    screen.PrintOoK(sliderValue);
+    screen.PrintOoK(stepValue);
     //Serial.print("PrintOoK\n");
 
     break;
