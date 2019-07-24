@@ -303,10 +303,13 @@ void MyScreen::PrintBmp(uint8_t type, uint16_t color, int8_t decX, int8_t decY)
     matrix_m->drawBitmap(decX, decY,  logo16_adafruit_bmp, 16, 16, color);
     break;
   case 1:
-    matrix_m->drawBitmap(decX, decY,  logo16_check_pattern_bmp, 8, 32, color);
-    matrix_m->drawBitmap(decX +  8, decY,  logo16_check_pattern_bmp, 8, 32, color);
-    matrix_m->drawBitmap(decX + 16, decY,  logo16_check_pattern_bmp, 8, 32, color);
-    matrix_m->drawBitmap(decX + 24, decY,  logo16_check_pattern_bmp, 8, 32, color);
+    matrix_m->drawBitmap(decX, decY,  logo16_check_pattern_bmp, 8, 16, color);
+    matrix_m->drawBitmap(decX +  8, decY,  logo16_check_pattern_bmp, 8, 16, color);
+    matrix_m->drawBitmap(decX + 16, decY,  logo16_check_pattern_bmp, 8, 16, color);
+    matrix_m->drawBitmap(decX + 24, decY,  logo16_check_pattern_bmp, 8, 16, color);
+    break;
+  case 2:
+    matrix_m->drawBitmap(decX, decY,  train_bmp, 24, 16, color);
     break;
   
   default:

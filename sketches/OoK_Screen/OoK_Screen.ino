@@ -107,7 +107,7 @@ void screenUpdate()
       coorX = -26;
       newValue = false;
     }
-    if(26 < coorX)
+    if(32 < coorX)
     {
       coorX = -26;
     }
@@ -120,11 +120,24 @@ void screenUpdate()
       coorX = -26;
       newValue = false;
     }
-    if(26 < coorX)
+    if(32 < coorX)
     {
       coorX = -26;
     }
     screen.PrintBike(GREEN, coorX, 0);
+    //Serial.print("PrintBike\n");
+    break;
+  case 9:
+    if(newValue)
+    {
+      coorX = -24;
+      newValue = false;
+    }
+    if(32 < coorX)
+    {
+      coorX = -24;
+    }
+    screen.PrintBmp(2, CYAN, coorX, 0);
     //Serial.print("PrintBike\n");
     break;
   
