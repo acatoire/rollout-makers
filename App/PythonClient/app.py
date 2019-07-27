@@ -1,6 +1,7 @@
 import blynklib
 import random
-from threading import Timer,Thread,Event
+
+from Modules.RepeatingEvent import RepeatingEvent
 
 # BLYNK_AUTH = '1MHwzmqo-DiF1XBll5qOYhemNfte2CYx'
 BLYNK_AUTH = 'xbzggg5NU6Ye9G4XD6utHK6l_3nqb5Lr'
@@ -13,24 +14,7 @@ WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
 READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 
 
-class MyThread(Thread):
-    def __init__(self, period, function):
-        Thread.__init__(self)
-
-        self.period = period
-        self.stopped = Event()
-        self.function_call = function
-
-    def run(self):
-        while not self.stopped.wait(self.period):
-            # call a function
-            self.function_call()
-
-    def stop(self):
-        self.stopped.set()
-
-
-def task_1s():
+def task():
     value = random.randint(0, 9)
 
     print("Send value: " + value.__str__())
@@ -39,8 +23,8 @@ def task_1s():
 
 def main():
 
-    thread = MyThread(5, task_1s)
-    thread.start()
+    task_launcher = RepeatingEvent(5, task)
+    task_launcher.start()
 
 
     # register handler for virtual pin V1 write event
