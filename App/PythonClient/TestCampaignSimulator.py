@@ -8,6 +8,7 @@ from Modules.BlynkManagers import BlynkSender
 BLYNK_AUTH = 'xbzggg5NU6Ye9G4XD6utHK6l_3nqb5Lr'
 
 
+
 class TestCampaignSimulator:
 
     def __init__(self):

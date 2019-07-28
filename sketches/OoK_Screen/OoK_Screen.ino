@@ -14,6 +14,22 @@
 
 #include "config.h"
 
+// screens
+#define WAIT       0
+#define RUN        1
+#define FAIL       2
+#define SUCCESS    3
+#define DRAW       4
+
+#define SCREEN_ID             V10
+#define SCREEN_TEST_TOTAL     V11
+#define SCREEN_TEST_ACTUAL    V12
+
+uint8_t screen_id           = 0;
+uint8_t screen_test_total   = 0;
+uint8_t screen_test_actual  = 0;
+
+
 // Config
 const char wifiSsid[] = WIFI_SSID;
 const char wifiPassword[] = WIFI_PASS;
@@ -26,49 +42,40 @@ uint8_t stepValue = 0;
 uint8_t valueDisplay = 0;
 uint8_t dropMenuValue = 0;
 
-BlynkTimer timer;
+BlynkTimer timerScreenUpdate;
+BlynkTimer timerValueUpdate;
 MyScreen screen;
 
-// This function will be called every time Slider Widget
-// in Blynk app writes values to the Virtual Pin 1
-BLYNK_WRITE(V2)
+void Draw(uint8_t id);
+
+
+BLYNK_WRITE(SCREEN_ID)
 {
-  buttonValue = param.asInt();
+  screen_id = param.asInt();
   newValue = true;
-  Serial.print("Button value is: ");
-  Serial.println(buttonValue);
+  Serial.print("screen_id value is: ");
+  Serial.println(screen_id);
   
 }
 
-// This function will be called every time Slider Widget
-// in Blynk app writes values to the Virtual Pin 1
-BLYNK_WRITE(V1)
+BLYNK_WRITE(SCREEN_TEST_TOTAL)
 {
-  stepValue = param.asInt(); 
+  screen_test_total = param.asInt(); 
   newValue = true;
-  Serial.print("Step value is: ");
-  Serial.println(stepValue);
+  Serial.print("screen_test_total value is: ");
+  Serial.println(screen_test_total);
   
 }
 
-// This function will be called every time Slider Widget
-// in Blynk app writes values to the Virtual Pin 1
-BLYNK_WRITE(V3)
+BLYNK_WRITE(SCREEN_TEST_ACTUAL)
 {
-  valueDisplay = param.asInt(); 
+  screen_test_actual = param.asInt(); 
   newValue = true;
-  Serial.print("ValueDisplay value is: ");
-  Serial.println(valueDisplay);
+  Serial.print("screen_test_actual value is: ");
+  Serial.println(screen_test_actual);
   
 }
 
-BLYNK_WRITE(V0)
-{
-  dropMenuValue = param.asInt();
-  newValue = true;
-  Serial.print("Drop list value is: ");
-  Serial.println(dropMenuValue);
-}
 
 void setup(void) 
 {
@@ -76,7 +83,8 @@ void setup(void)
   Serial.print("Setup Start\n");
 
   Blynk.begin(blynkAuth, wifiSsid, wifiPassword);
-  timer.setInterval(100L, screenUpdate);
+  timerScreenUpdate.setInterval(100L, screenUpdate);
+  timerValueUpdate.setInterval(5000L, valueUpdate);
 
   screen.Setup();
 
@@ -84,88 +92,139 @@ void setup(void)
 
 }
 
-void screenUpdate()
+void valueUpdate(void)
+{
+
+  Blynk.syncAll();
+
+}
+
+void screenUpdate(void)
 {
 
   screen.Clear();
-  switch (stepValue)
+    
+  switch (screen_id)
   {
-  case 0:
-  case 1:
-  case 2:
-  case 3:
-  case 4:
-  case 5:
-    screen.PrintOoK(stepValue);
-    //Serial.print("PrintOoK\n");
+    case WAIT :
+      Draw(0);
 
     break;
-  case 6:
-    if(newValue)
-    {
-      coorX = -7;
-      newValue = false;
-    }
-    if(39 < coorX)
-    {
-      coorX = -7;
-    }
-    screen.PrintStickMan(coorX, BLUE, coorX, 0);
-    //Serial.print("Sticky\n");
+
+    case RUN :
+      screen.PrintTestStatus(screen_test_actual, screen_test_total);
+
     break;
-  case 7:
-    if(newValue)
-    {
-      coorX = -26;
-      newValue = false;
-    }
-    if(32 < coorX)
-    {
-      coorX = -26;
-    }
-    screen.PrintCar(RED, coorX, 0);
-    //Serial.print("PrintCar\n");
+    
+    case FAIL :
+      screen.PrintOoK(OoK_Fail);
+
     break;
-  case 8:
-    if(newValue)
-    {
-      coorX = -26;
-      newValue = false;
-    }
-    if(32 < coorX)
-    {
-      coorX = -26;
-    }
-    screen.PrintBike(GREEN, coorX, 0);
-    //Serial.print("PrintBike\n");
+    
+    case SUCCESS :
+      screen.PrintOoK(OoK_Success);
+
     break;
-  case 9:
-    if(newValue)
-    {
-      coorX = -24;
-      newValue = false;
-    }
-    if(32 < coorX)
-    {
-      coorX = -24;
-    }
-    screen.PrintBmp(2, CYAN, coorX, 0);
-    //Serial.print("PrintBike\n");
-    break;
-  
-  default:
+    
+    case DRAW :
+      Draw(screen_test_actual);
+
     break;
   }
-  
+
   screen.Update();
+}
+
+void Draw(uint8_t id)
+{
+  switch (id)
+  {
+    case 0:
+      if(newValue)
+      {
+        coorX = -7;
+        newValue = false;
+      }
+      if(39 < coorX)
+      {
+        coorX = -7;
+      }
+      screen.PrintStickMan(coorX, BLUE, coorX, 0);
+
+      break;
+
+    case 1:
+      if(newValue)
+      {
+        coorX = -7;
+        newValue = false;
+      }
+      if(39 < coorX)
+      {
+        coorX = -7;
+      }
+      screen.PrintStickMan(coorX, BLUE, coorX, 0);
+      //Serial.print("Sticky\n");
+      break;
+
+    case 2:
+      if(newValue)
+      {
+        coorX = -26;
+        newValue = false;
+      }
+      if(32 < coorX)
+      {
+        coorX = -26;
+      }
+      screen.PrintCar(RED, coorX, 0);
+      //Serial.print("PrintCar\n");
+      break;
+
+    case 3:
+
+      if(newValue)
+      {
+        coorX = -26;
+        newValue = false;
+      }
+      if(32 < coorX)
+      {
+        coorX = -26;
+      }
+      screen.PrintBike(GREEN, coorX, 0);
+      //Serial.print("PrintBike\n");
+      break;
+
+    case 4:
+
+      if(newValue)
+      {
+        coorX = -24;
+        newValue = false;
+      }
+      if(32 < coorX)
+      {
+        coorX = -24;
+      }
+      screen.PrintBmp(2, CYAN, coorX, 0);
+      //Serial.print("PrintBike\n");
+      break;
+  
+    default:
+      break;
+  }
+
   coorX++;
 }
+
 
 
 void loop(void) 
 {
   Blynk.run();
-  timer.run();
+  timerScreenUpdate.run();
+  timerValueUpdate.run();
 }
 
 

@@ -1,6 +1,14 @@
 
 import blynklib
 
+screens = {
+  "Wait": 0,
+  "TestRun": 1,
+  "TestFail": 2,
+  "TestSuccess": 3,
+  "Draw": 4
+}
+
 
 class BlynkSender:
 
@@ -11,7 +19,7 @@ class BlynkSender:
         self.WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
         self.READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 
-        self.screen_id = 0
+        self.screen_id = screens["Wait"]
         self.test_run_total_nb = 0
         self.test_run_actual = 0
 
@@ -22,9 +30,9 @@ class BlynkSender:
     def update_to_server(self):
 
         print("Send screen info: " +
-              self.blynk_screen.screen_id.__str__() + "/" +
-              self.blynk_screen.test_run_actual.__str__() + "/" +
-              self.blynk_screen.test_run_total_nb.__str__())
+              self.screen_id.__str__() + "/" +
+              self.test_run_actual.__str__() + "/" +
+              self.test_run_total_nb.__str__())
 
         self.blynk.virtual_write(10, self.screen_id)
         self.blynk.virtual_write(11, self.test_run_total_nb)
@@ -41,17 +49,21 @@ class BlynkSender:
 
     def set_screen_test_run(self, total, actual):
 
-        self.screen_id = 0
+        self.screen_id = screens["TestRun"]
         self.test_run_total_nb = total
         self.test_run_actual = actual
 
     def set_screen_fail(self):
 
-        self.screen_id = 1
+        self.screen_id = screens["TestFail"]
 
     def set_screen_success(self):
 
-        self.screen_id = 2
+        self.screen_id = screens["TestSuccess"]
+
+    def set_screen_draw(self):
+
+        self.screen_id = screens["Draw"]
 
 class BlynkReader:
 
@@ -62,7 +74,7 @@ class BlynkReader:
         self.WRITE_EVENT_PRINT_MSG = "[WRITE_VIRTUAL_PIN_EVENT] Pin: V{} Value: '{}'"
         self.READ_PRINT_MSG = "[READ_VIRTUAL_PIN_EVENT] Pin: V{}"
 
-        self.screen_id = 0
+        self.screen_id = screens["Wait"]
         self.test_run_total_nb = 0
         self.test_run_actual = 0
 

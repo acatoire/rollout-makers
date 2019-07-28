@@ -20,6 +20,10 @@
 #define WHITE    0xFFFF
 
 
+#define OoK_Fail      2
+#define OoK_Success   4
+
+
 #define _CLK 4
 #define _OE   0
 #define _LAT 2
@@ -40,6 +44,7 @@ class MyScreen
     void PrintFull(uint16_t color);
     void PrintFull(uint8_t R, uint8_t G, uint8_t B);
     void PrintTwoTimes(uint8_t minutesByBike, uint8_t minutesByCar);
+    void PrintTestStatus(uint8_t actual, uint8_t total);
 
     void PrintOoK_empty(uint16_t color);
     void PrintOoK(uint8_t type);

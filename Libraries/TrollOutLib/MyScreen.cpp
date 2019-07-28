@@ -89,6 +89,32 @@ void MyScreen::PrintTwoTimes(uint8_t minutesByBike, uint8_t minutesByCar)
 
 }
 
+void MyScreen::PrintTestStatus(uint8_t actual, uint8_t total)
+{
+  
+  String firstLine;
+  String secondLine;
+
+  matrix_m->setTextSize(1);   // size 1 == 8 pixels high
+
+  MyScreen::Clear();
+  
+  // print each letter with a rainbow color
+  matrix_m->setCursor(0, 0);  // First line
+  matrix_m->setTextColor(WHITE);
+  
+  firstLine = "Name";
+  matrix_m->print(firstLine);
+
+  matrix_m->setCursor(0, 9);  // Second line
+  matrix_m->setTextColor(WHITE);
+  
+  secondLine = String(actual) + "/" + String(total);
+  matrix_m->print(secondLine);
+  
+  MyScreen::Update();
+
+}
 
 void MyScreen::PrintOoK(uint8_t type)
 {
@@ -156,7 +182,7 @@ void MyScreen::PrintOoK(uint8_t type)
         MyScreen::PrintOoK_empty(color_body);
         // draw green tick on left
         matrix_m->drawLine(11, 6, 12, 7, GREEN);
-        matrix_m->drawLine(12, 7, 14, 5,GREEN);
+        matrix_m->drawLine(12, 7, 14, 5, GREEN);
         // Draw big right circle
         matrix_m->drawCircle(20, 5, 3, color_body);
       
