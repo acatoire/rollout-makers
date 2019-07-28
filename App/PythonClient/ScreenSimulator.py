@@ -23,7 +23,7 @@ class ScreenSimulator:
         task_blynk = RepeatingEvent(0.5, self.task_blynk_runner)
         task_blynk.start()
         # #  Recurring task to simulate value update
-        task_value = RepeatingEvent(1, self.task_reader)
+        task_value = RepeatingEvent(5, self.task_reader)
         task_value.start()
 
     def task_blynk_runner(self):
@@ -33,15 +33,12 @@ class ScreenSimulator:
 
     def task_reader(self):
 
-        # Get value from server
-        self.blynk_screen.server_update(self.pin)
-
-        if self.pin == 10:
-            self.pin = 11
-        elif self.pin == 11:
-            self.pin = 12
-        elif self.pin == 12:
-            self.pin = 10
+        self.blynk_screen.server_update(10)
+        time.sleep(0.5)
+        self.blynk_screen.server_update(11)
+        time.sleep(0.5)
+        self.blynk_screen.server_update(12)
+        time.sleep(0.5)
 
         # Print Receive values
         print("Read screen info: " +
