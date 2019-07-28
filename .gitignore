@@ -2,3 +2,4 @@ sketches/build/*
 sketches/*/config.h
 App/PythonClient/.idea/
 App/PythonClient/venv/
+App/PythonClient/Modules/__pycache__/

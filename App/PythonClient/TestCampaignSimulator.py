@@ -24,7 +24,7 @@ class TestCampaignSimulator:
         task_blynk = RepeatingEvent(0.5, self.task_blynk_runner)
         task_blynk.start()
         # #  Recurring task to simulate value update
-        task_value = RepeatingEvent(5, self.task_updater)
+        task_value = RepeatingEvent(10, self.task_updater)
         task_value.start()
 
     def task_blynk_runner(self):
@@ -56,7 +56,7 @@ class TestCampaignSimulator:
             # update screen
             self.sender.set_screen_test_run(self.test_run_total_nb, self.test_run_actual)
 
-        self.sender.update()
+        self.sender.update_to_server()
 
 
 def main():
