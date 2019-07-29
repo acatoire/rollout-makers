@@ -3,8 +3,31 @@ Rollout project for the 2019 We make it happen Contest
 
 
 ## Project Description
+The project is a home automation screen.
+Multiples event can be shown on the screen.
 
+The project is composed of several components:
+ - The screen, running on esp32
+ - A detector to start event from the esp32
+   * On movement detection start a bike/car compare on the screen for morning boost
+ - A Blynk server that host screens commands
+ - Multiples python clients to update the screen on :
+   * Home automation event
+   * Jenkins event
+   * Running script event 
+ 
+### Screens commands
 
+The blynk server host the followings elements:
+ - ScreenId
+ - ScreenOption
+ - ScreenActual
+ - ScreenMax
+ - ScreenText
+
+### Client/Server interactions
+
+To read the following diagram use [stackedit](https://stackedit.io/app#)
 ```mermaid
 sequenceDiagram
 Note right of Client Python: Every step change
@@ -21,6 +44,33 @@ Blynk Server ->> Client Arduino: Send ScreenActual
 Blynk Server ->> Client Arduino: Send ScreenMax
 ```
 
+### Command table
+
+| Id  | Option | Actual | Max | Action on screen                
+|-----|-----|-----|-----|---------------------------------
+|  0  |  y  |  x  |  x  | Default welcome screen, draw a picture, y is the picture id
+|  1  |  0  |  y  |  z  | Test bench running screen : line1 = ScreenText line2 = y / z
+|  1  |  1  |  x  |  x  | Test bench Fail screen 
+|  1  |  2  |  x  |  x  | Test bench Success screen 
+|  2  |  x  |  x  |  x  | Jenkins Alert screen : line1 = ScreenText line2 = FAILD
+|  3  |     |     |     | 
+|  4  |     |     |     | 
+|  5  |     |     |     | 
+|  6  |     |     |     | 
+|  7  |     |     |     | 
+
+### Picture table
+
+| PictureId | Picture 
+|-----------|--------------
+|     0     | Walking man
+|     1     | Car
+|     1     | Bike
+|     1     | 
+|     2     | 
+|     3     | 
+
+
 ## Setup the environment
 
 ### Sources
@@ -28,9 +78,8 @@ Checkout the project from https://github.com/acatoire/rollout-makers
 
 The target board is node32s
 
-### Needed arduino libraries
+### Needed Arduino libraries
 All needed library are copied in the Libraries folder for quick setup
-
 
 ### Mounting project libraries
 From the Libraries edit mount.bat with the correct path by editing arduino_lib_path and project_lib_path.
