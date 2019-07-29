@@ -7,19 +7,19 @@ Rollout project for the 2019 We make it happen Contest
 
 ```mermaid
 sequenceDiagram
-
 Note right of Client Python: Every step change
 Client Python ->> Blynk Server: Send ScreenId
+Client Python ->> Blynk Server: Send ScreenOption
 Client Python ->> Blynk Server: Send ScreenActual
 Client Python ->> Blynk Server: Send ScreenMax
 
 Note left of Client Arduino: Every 1s
 Client Arduino ->> Blynk Server: SyncValues request
 Blynk Server ->> Client Arduino: Send ScreenId
+Blynk Server ->> Client Arduino: Send ScreenOption
 Blynk Server ->> Client Arduino: Send ScreenActual
 Blynk Server ->> Client Arduino: Send ScreenMax
 ```
-
 
 ## Setup the environment
 
