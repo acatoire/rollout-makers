@@ -14,40 +14,69 @@
 
 #include "config.h"
 
-// screens
-#define WAIT       0
-#define RUN        1
-#define FAIL       2
-#define SUCCESS    3
-#define DRAW       4
+// Screen Config
+#define SCREEN_ID     V10
+#define SCREEN_OPTION  V11
+#define SCREEN_ACTUAL V12
+#define SCREEN_MAX    V13
+#define SCREEN_TEXT   V14
 
-#define SCREEN_ID             V10
-#define SCREEN_TEST_TOTAL     V11
-#define SCREEN_TEST_ACTUAL    V12
+uint8_t screen_id      = 0;
+uint8_t screen_option   = 0;
+uint8_t screen_actual  = 0;
+uint8_t screen_max     = 0;
+uint8_t* screen_text    = (uint8_t*)"1234567890ABCDEFGHIJ";
 
-uint8_t screen_id           = 0;
-uint8_t screen_test_total   = 0;
-uint8_t screen_test_actual  = 0;
+// IDs definition
+enum ScreenId 
+{ 
+  SCREEN_WELCOME     = 0, 
+  SCREEN_TESTBENCH   = 1, 
+  SCREEN_JENKINS     = 2, 
+  SCREEN_MOBILITY    = 3,
+  SCREEN_BATTERY     = 4
+};
+
+enum MobilityId 
+{ 
+  MOB_WALK   = 1, 
+  MOB_BIKE   = 2, 
+  MOB_TRAM   = 3,
+  MOB_CAR    = 4 
+};
+
+enum PictureId 
+{ 
+  PICT_NO            = 0, 
+  PICT_WALKING_MAN   = 1, 
+  PICT_BIKE          = 2, 
+  PICT_CAR           = 3,
+  PICT_TRAIN         = 4 
+};
+
+enum TestBenchScreenId 
+{ 
+  TEST_OFF     = 0, 
+  TEST_RUN     = 1, 
+  TEST_FAILED  = 2, 
+  TEST_SUCCESS = 3
+};
 
 
 // Config
-const char wifiSsid[] = WIFI_SSID;
 const char wifiPassword[] = WIFI_PASS;
+const char wifiSsid[] = WIFI_SSID;
 char blynkAuth[] = "xbzggg5NU6Ye9G4XD6utHK6l_3nqb5Lr";
 
-int8_t coorX = -7;
 bool newValue = false;
-uint8_t buttonValue = 0;
-uint8_t stepValue = 0;
-uint8_t valueDisplay = 0;
-uint8_t dropMenuValue = 0;
+uint16_t loopId = 0;
 
 BlynkTimer timerScreenUpdate;
 BlynkTimer timerValueUpdate;
 MyScreen screen;
 
-void Draw(uint8_t id);
 
+// Get the server data
 
 BLYNK_WRITE(SCREEN_ID)
 {
@@ -55,28 +84,41 @@ BLYNK_WRITE(SCREEN_ID)
   newValue = true;
   Serial.print("screen_id value is: ");
   Serial.println(screen_id);
-  
 }
 
-BLYNK_WRITE(SCREEN_TEST_TOTAL)
+BLYNK_WRITE(SCREEN_OPTION)
 {
-  screen_test_total = param.asInt(); 
+  screen_option = param.asInt(); 
   newValue = true;
-  Serial.print("screen_test_total value is: ");
-  Serial.println(screen_test_total);
-  
+  Serial.print("screen_option value is: ");
+  Serial.println(screen_option);
 }
 
-BLYNK_WRITE(SCREEN_TEST_ACTUAL)
+BLYNK_WRITE(SCREEN_ACTUAL)
 {
-  screen_test_actual = param.asInt(); 
+  screen_actual = param.asInt(); 
   newValue = true;
-  Serial.print("screen_test_actual value is: ");
-  Serial.println(screen_test_actual);
-  
+  Serial.print("screen_actual value is: ");
+  Serial.println(screen_actual);
 }
 
+BLYNK_WRITE(SCREEN_MAX)
+{
+  screen_max = param.asInt(); 
+  newValue = true;
+  Serial.print("screen_max value is: ");
+  Serial.println(screen_max);
+}
 
+BLYNK_WRITE(SCREEN_TEXT)
+{
+  screen_text = (uint8_t*)param.asString(); 
+  newValue = true;
+  Serial.print("screen_text value is: ");
+  Serial.println((char*)screen_text);
+}
+
+// Setup
 void setup(void) 
 {
   Serial.begin(115200);
@@ -92,6 +134,7 @@ void setup(void)
 
 }
 
+// Function to periodically update value from server
 void valueUpdate(void)
 {
 
@@ -99,6 +142,7 @@ void valueUpdate(void)
 
 }
 
+// Function to periodically update the screen
 void screenUpdate(void)
 {
 
@@ -106,118 +150,62 @@ void screenUpdate(void)
     
   switch (screen_id)
   {
-    case WAIT :
-      Draw(0);
+    case SCREEN_WELCOME :
+      screen.PrintBmp(screen_option, WHITE, RED, 0);
 
     break;
 
-    case RUN :
-      screen.PrintTestStatus(screen_test_actual, screen_test_total);
+    case SCREEN_TESTBENCH :
+      switch (screen_id)
+      {
+        case TEST_RUN :
+          screen.PrintTestStatus(screen_actual, screen_max);
+        break;
 
+        case TEST_FAILED :
+          screen.PrintOoK(OoK_Fail);
+        break;
+
+        case TEST_SUCCESS :
+          screen.PrintOoK(OoK_Success);
+        break;
+        
+        case TEST_OFF :
+        default:
+          screen.Clear();
+        break;
+      }
     break;
-    
-    case FAIL :
-      screen.PrintOoK(OoK_Fail);
 
+    case SCREEN_JENKINS :
+      screen.PrintJenkins(screen_text);
     break;
-    
-    case SUCCESS :
-      screen.PrintOoK(OoK_Success);
 
+    case SCREEN_MOBILITY :
+          if (loopId < 50)
+          {
+              screen.PrintTwoTimes(25,35);
+          }
+          else if (loopId < 75)
+          {
+              screen.PrintBike(GREEN, 0, 0);
+          }
+          else if (loopId < 100)
+          {
+              screen.PrintCar(RED, 0, 0);
+          }
+          
+          loopId++;
+          loopId = loopId % 100;
     break;
-    
-    case DRAW :
-      Draw(screen_test_actual);
 
+    case SCREEN_BATTERY :
+          screen.PrintBattery(screen_actual, WHITE, 0, 0);
     break;
   }
 
   screen.Update();
 }
-
-void Draw(uint8_t id)
-{
-  switch (id)
-  {
-    case 0:
-      if(newValue)
-      {
-        coorX = -7;
-        newValue = false;
-      }
-      if(39 < coorX)
-      {
-        coorX = -7;
-      }
-      screen.PrintStickMan(coorX, BLUE, coorX, 0);
-
-      break;
-
-    case 1:
-      if(newValue)
-      {
-        coorX = -7;
-        newValue = false;
-      }
-      if(39 < coorX)
-      {
-        coorX = -7;
-      }
-      screen.PrintStickMan(coorX, BLUE, coorX, 0);
-      //Serial.print("Sticky\n");
-      break;
-
-    case 2:
-      if(newValue)
-      {
-        coorX = -26;
-        newValue = false;
-      }
-      if(32 < coorX)
-      {
-        coorX = -26;
-      }
-      screen.PrintCar(RED, coorX, 0);
-      //Serial.print("PrintCar\n");
-      break;
-
-    case 3:
-
-      if(newValue)
-      {
-        coorX = -26;
-        newValue = false;
-      }
-      if(32 < coorX)
-      {
-        coorX = -26;
-      }
-      screen.PrintBike(GREEN, coorX, 0);
-      //Serial.print("PrintBike\n");
-      break;
-
-    case 4:
-
-      if(newValue)
-      {
-        coorX = -24;
-        newValue = false;
-      }
-      if(32 < coorX)
-      {
-        coorX = -24;
-      }
-      screen.PrintBmp(2, CYAN, coorX, 0);
-      //Serial.print("PrintBike\n");
-      break;
-  
-    default:
-      break;
-  }
-
-  coorX++;
-}
-
 
 
 void loop(void) 

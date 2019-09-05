@@ -19,11 +19,11 @@ The project is composed of several components:
 ### Screens commands
 
 The blynk server host the followings elements:
- - ScreenId
- - ScreenOption
- - ScreenActual
- - ScreenMax
- - ScreenText
+ - ScreenId (V10)
+ - ScreenOption (V11)
+ - ScreenActual (V12)
+ - ScreenMax (V13)
+ - ScreenText (V14)
 
 ### Client/Server interactions
 
@@ -46,29 +46,41 @@ Blynk Server ->> Client Arduino: Send ScreenMax
 
 ### Command table
 
+| V10 |  V11   |  V12   | V13 | Action on screen  
 | Id  | Option | Actual | Max | Action on screen                
-|-----|-----|-----|-----|---------------------------------
-|  0  |  y  |  x  |  x  | Default welcome screen, draw a picture, y is the picture id
-|  1  |  0  |  y  |  z  | Test bench running screen : line1 = ScreenText line2 = y / z
-|  1  |  1  |  x  |  x  | Test bench Fail screen 
-|  1  |  2  |  x  |  x  | Test bench Success screen 
-|  2  |  x  |  x  |  x  | Jenkins Alert screen : line1 = ScreenText line2 = FAILD
-|  3  |     |     |     | 
-|  4  |     |     |     | 
-|  5  |     |     |     | 
-|  6  |     |     |     | 
-|  7  |     |     |     | 
+|-----|--------|--------|-----|---------------------------------
+|  0  |   id   |    -   |  -  | Default welcome screen, draw a picture, option is the picture id
+|  1  |    -   |    y   |  z  | Test bench running screen : line1 = ScreenText line2 = y / z
+|  1  |    1   |    -   |  -  | Test bench Fail screen 
+|  1  |    2   |    -   |  -  | Test bench Success screen 
+|  2  |    -   |    -   |  -  | Jenkins Alert screen : line1 = ScreenText line2 = FAILD
+|  3  |    -   |    -   |  -  | Mobility Companion screen : option/actual choose the mobility to compare
+|  4  |    -   |   %    |  -  | Battery screen : actual is 0% to 100%
+|  5  |    -   |   -    |  -  | 
+|  6  |    -   |   -    |  -  | 
+|  7  |    -   |   -    |  -  | 
+
+### Mobility id table
+
+| MobilityId | type 
+|------------|--------------
+|     1      | Walk
+|     2      | Bike
+|     3      | Tram/Bus
+|     4      | Car
+
 
 ### Picture table
 
 | PictureId | Picture 
 |-----------|--------------
-|     0     | Walking man
-|     1     | Car
-|     1     | Bike
-|     1     | 
-|     2     | 
-|     3     | 
+|     0     | No
+|     1     | Walking man
+|     2     | Bike 
+|     3     | Car
+|     4     | Train
+|     5     | 
+|     5     | 
 
 
 ## Setup the environment

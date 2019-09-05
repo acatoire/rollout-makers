@@ -103,13 +103,40 @@ void MyScreen::PrintTestStatus(uint8_t actual, uint8_t total)
   matrix_m->setCursor(0, 0);  // First line
   matrix_m->setTextColor(WHITE);
   
-  firstLine = "Name";
+  firstLine = "Test";
   matrix_m->print(firstLine);
 
   matrix_m->setCursor(0, 9);  // Second line
   matrix_m->setTextColor(WHITE);
   
   secondLine = String(actual) + "/" + String(total);
+  matrix_m->print(secondLine);
+  
+  MyScreen::Update();
+
+}
+
+void MyScreen::PrintJenkins(uint8_t * textToPrint)
+{
+  
+  String firstLine;
+  String secondLine;
+
+  matrix_m->setTextSize(1);   // size 1 == 8 pixels high
+
+  MyScreen::Clear();
+  
+  // print each letter with a rainbow color
+  matrix_m->setCursor(0, 0);  // First line
+  matrix_m->setTextColor(WHITE);
+  
+  firstLine = "JENK";
+  matrix_m->print(firstLine);
+
+  matrix_m->setCursor(0, 9);  // Second line
+  matrix_m->setTextColor(WHITE);
+  
+  secondLine = "INS";
   matrix_m->print(secondLine);
   
   MyScreen::Update();
