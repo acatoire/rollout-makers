@@ -46,7 +46,6 @@ Blynk Server ->> Client Arduino: Send ScreenMax
 
 ### Command table
 
-| V10 |  V11   |  V12   | V13 | Action on screen  
 | Id  | Option | Actual | Max | Action on screen                
 |-----|--------|--------|-----|---------------------------------
 |  0  |   id   |    -   |  -  | Default welcome screen, draw a picture, option is the picture id
