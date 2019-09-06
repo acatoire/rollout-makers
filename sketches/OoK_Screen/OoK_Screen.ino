@@ -34,7 +34,8 @@ enum ScreenId
   SCREEN_TESTBENCH   = 1, 
   SCREEN_JENKINS     = 2, 
   SCREEN_MOBILITY    = 3,
-  SCREEN_BATTERY     = 4
+  SCREEN_BATTERY     = 4,
+  SCREEN_PICT        = 5
 };
 
 enum MobilityId 
@@ -151,7 +152,20 @@ void screenUpdate(void)
   switch (screen_id)
   {
     case SCREEN_WELCOME :
-      screen.PrintBmp(screen_option, WHITE, RED, 0);
+
+        //screen.PrintFull(WHITE);
+        //screen.PrintBmp(1, RED, 0, 0);
+        screen.PrintStickMan(loopId, GREEN, loopId, 0);
+
+      if (32 == loopId)
+      {
+        loopId = -7;
+      }
+      else
+      {
+        loopId++;
+      }
+      
 
     break;
 
@@ -200,7 +214,11 @@ void screenUpdate(void)
     break;
 
     case SCREEN_BATTERY :
-          screen.PrintBattery(screen_actual, WHITE, 0, 0);
+          screen.PrintBattery(screen_actual * 10, WHITE, 0, 0);
+    break;
+
+    case SCREEN_PICT :
+          screen.PrintBmp(screen_option, WHITE, RED, 0);
     break;
   }
 
