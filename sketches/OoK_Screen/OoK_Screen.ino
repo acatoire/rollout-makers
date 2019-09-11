@@ -22,11 +22,11 @@
 #define SCREEN_MAX    V13
 #define SCREEN_TEXT   V14
 
-uint8_t screen_id      = 3;
-uint8_t screen_option   = 0;
+uint8_t screen_id      = 0;
+uint8_t screen_option  = 0;
 uint8_t screen_actual  = 0;
 uint8_t screen_max     = 0;
-uint8_t* screen_text    = (uint8_t*)"1234567890ABCDEFGHIJ";
+uint8_t* screen_text   = (uint8_t*)"1234567890ABCDEFGHIJ";
 
 // IDs definition
 enum ScreenId
@@ -151,8 +151,9 @@ void valueUpdate(void)
 // Function to periodically update the screen
 void screenUpdate(void)
 {
-  DirectionsResponse infoBike;
-  DirectionsResponse infoCar;
+  static DirectionsResponse infoBike;
+  static DirectionsResponse infoCar;
+  static bool requestInfo = true;
   screen.Clear();
 
   switch (screen_id)
@@ -202,12 +203,17 @@ void screenUpdate(void)
       break;
 
     case SCREEN_MOBILITY :
-      infoBike = travel.GetInfoByBike();
-      infoCar = travel.GetInfoByCar();
+
       if (loopId < 50)
       {
-        printf("test");
-        screen.PrintTwoTimes(infoBike.duration_value, infoCar.duration_value);
+        if(requestInfo)
+        {
+        infoBike = travel.GetInfoByBike();
+        infoCar = travel.GetInfoByCar();  
+        requestInfo = false;
+        }//else NTD
+        
+        screen.PrintTwoTimes(infoBike.duration_value, infoCar.durationTraffic_value);
       }
       else if (loopId < 75)
       {
