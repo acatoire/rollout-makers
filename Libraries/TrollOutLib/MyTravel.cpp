@@ -33,7 +33,7 @@ void MyTravel::Init(String from, String to)
 String MyTravel::GetDurationByBike(void)
 {
   String out;
-  DirectionsResponse responseFinal;
+  static DirectionsResponse responseFinal;
   DirectionsResponse response;
 
   inputOptions_m.travelMode = "bicycling";
@@ -64,26 +64,29 @@ String MyTravel::GetDurationByBike(void)
 // TODO return a struct with (timeInMinutes, DistanceInKmx10)
 DirectionsResponse MyTravel::GetInfoByBike(void)
 {
-  String out;
-  DirectionsResponse responseFinal;
+  static DirectionsResponse infoBikeResponseFinal;
   DirectionsResponse response;
 
   inputOptions_m.travelMode = "bicycling";
   inputOptions_m.trafficModel = "";
 
-  Serial.println("start bike request ");
+
   if(bikeRefreshFlag_m == true)
   {
+      Serial.println("start bike request ");
 	  // Send request
       response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
-      responseFinal = response;
-      response = api_m.directionsApi(origin_m, destination_m, inputOptions_m); 
+      infoBikeResponseFinal = response;
+      response = api_m.directionsApi(origin_m, destination_m, inputOptions_m); //fake request due to a bug into the library. No extra time to fix this bug 1/2 request is working.
 	  bikeRefreshFlag_m = false;
 	  api_lasttime_m = millis();
+      Serial.println(infoBikeResponseFinal.duration_value);
+      Serial.println("end bike request ");
   }
   else if (millis() > (api_lasttime_m + api_mtbs_m))
   {
 	  //next request is allowed
+      Serial.println("reset bike request ");
 	  bikeRefreshFlag_m = true;
   }
   else
@@ -91,9 +94,8 @@ DirectionsResponse MyTravel::GetInfoByBike(void)
        //nothing to do
   }
   
-    Serial.println("end bike request ");
-    responseFinal = ConvertValueintoMinutesAndKilometers(responseFinal);
-  return responseFinal;
+    infoBikeResponseFinal = ConvertValueintoMinutesAndKilometers(infoBikeResponseFinal);
+  return infoBikeResponseFinal;
 
 }
 
@@ -102,7 +104,7 @@ String MyTravel::GetDurationByCar (void)
 {
   String out;
 
-  DirectionsResponse responseFinal;
+  static DirectionsResponse responseFinal;
   DirectionsResponse response;
 
   inputOptions_m.travelMode = "driving"; 
@@ -111,12 +113,14 @@ String MyTravel::GetDurationByCar (void)
   if(carRefreshFlag_m == true)
   {
 	  // Send request
+      Serial.println("start car request ");
       response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
       responseFinal = response;
-      response = api_m.directionsApi(origin_m, destination_m, inputOptions_m);
+      response = api_m.directionsApi(origin_m, destination_m, inputOptions_m); //fake request due to a bug into the library. No extra time to fix this bug 1/2 request is working.
 
       api_lasttime_m = millis();
 	  carRefreshFlag_m = false;
+      Serial.println("start end request ");
   }
   else if (millis() > (api_lasttime_m + api_mtbs_m))
   {
@@ -136,9 +140,7 @@ String MyTravel::GetDurationByCar (void)
 
 DirectionsResponse MyTravel::GetInfoByCar (void)
 {
-  String out;
-
-  DirectionsResponse responseFinal;
+  static DirectionsResponse responseFinal;
   DirectionsResponse response;
 
   inputOptions_m.travelMode = "driving"; 
