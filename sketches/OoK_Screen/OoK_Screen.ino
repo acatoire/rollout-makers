@@ -204,28 +204,32 @@ void screenUpdate(void)
 
     case SCREEN_MOBILITY :
 
+      if(requestInfo)
+      {
+         infoBike = travel.GetInfoByBike();
+         infoCar = travel.GetInfoByCar();  
+         requestInfo = false;
+      }//else NTD
+        
       if (loopId < 50)
       {
-        if(requestInfo)
-        {
-        infoBike = travel.GetInfoByBike();
-        infoCar = travel.GetInfoByCar();  
-        requestInfo = false;
-        }//else NTD
-        
         screen.PrintTwoTimes(infoBike.duration_value, infoCar.durationTraffic_value);
       }
-      else if (loopId < 75)
+      else if (loopId < 100)
+      {
+        screen.PrintTwoDistance((infoBike.distance_value/10), (infoCar.distance_value/10)); //TODO : manage decimal value
+      }
+      else if (loopId < 150) //TODO: add gas (CO2) emission screen
       {
         screen.PrintBike(GREEN, 0, 0);
       }
-      else if (loopId < 100)
+      else if (loopId < 200)
       {
         screen.PrintCar(RED, 0, 0);
       }
 
       loopId++;
-      loopId = loopId % 100;
+      loopId = loopId % 200;
       break;
 
     case SCREEN_BATTERY :
