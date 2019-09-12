@@ -44,6 +44,7 @@ class MyScreen
     void PrintFull(uint16_t color);
     void PrintFull(uint8_t R, uint8_t G, uint8_t B);
     void PrintTwoTimes(uint8_t minutesByBike, uint8_t minutesByCar);
+    void PrintTwoDistance(uint8_t distanceByBike, uint8_t distanceByCar);
     void PrintTestStatus(uint8_t actual, uint8_t total);
     void PrintJenkins(uint8_t * textToPrint);
 

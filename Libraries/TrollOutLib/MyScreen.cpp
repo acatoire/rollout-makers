@@ -89,6 +89,35 @@ void MyScreen::PrintTwoTimes(uint8_t minutesByBike, uint8_t minutesByCar)
 
 }
 
+void MyScreen::PrintTwoDistance(uint8_t distanceByBike, uint8_t distanceByCar)
+{
+  
+  String convertNumber;
+
+  matrix_m->setTextSize(1);   // size 1 == 8 pixels high
+
+  MyScreen::Clear();
+  
+  // print each letter with a rainbow color
+  matrix_m->setCursor(8, 0);  // First line
+  matrix_m->setTextColor(matrix_m->Color333(0,7,0));
+  
+  convertNumber = String(distanceByBike);
+  
+  matrix_m->print(convertNumber);
+  matrix_m->print("km");
+
+  matrix_m->setCursor(8, 9);  // Second line
+  matrix_m->setTextColor(matrix_m->Color333(7,0,0));
+  convertNumber = String(distanceByCar);
+  
+  matrix_m->print(convertNumber);
+  matrix_m->print("km");
+  
+  MyScreen::Update();
+
+}
+
 void MyScreen::PrintTestStatus(uint8_t actual, uint8_t total)
 {
   
