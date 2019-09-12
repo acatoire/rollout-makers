@@ -45,8 +45,10 @@ class MyScreen
     void PrintFull(uint8_t R, uint8_t G, uint8_t B);
     void PrintTwoTimes(uint8_t minutesByBike, uint8_t minutesByCar);
     void PrintTwoDistance(uint8_t distanceByBike, uint8_t distanceByCar);
+    void PrintTwoEmissionGas(uint8_t distance,uint8_t gas, uint8_t transportation);
     void PrintTestStatus(uint8_t actual, uint8_t total);
     void PrintJenkins(uint8_t * textToPrint);
+    void PrintLoading(void);
 
     void PrintOoK_empty(uint16_t color);
     void PrintOoK(uint8_t type);
@@ -54,7 +56,7 @@ class MyScreen
     void PrintCar(uint16_t color, int8_t decX, int8_t decY);
     void PrintBmp(uint8_t type, uint16_t color, int8_t decX, int8_t decY);
     void PrintStickMan(uint8_t frame, uint16_t color, int8_t decX, int8_t decY);
-	  void PrintBattery(uint8_t percentage, uint16_t shape_color, int8_t decX, int8_t decY);
+	void PrintBattery(uint8_t percentage, uint16_t shape_color, int8_t decX, int8_t decY);
 
   
   private:

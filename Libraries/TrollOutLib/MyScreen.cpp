@@ -118,6 +118,36 @@ void MyScreen::PrintTwoDistance(uint8_t distanceByBike, uint8_t distanceByCar)
 
 }
 
+void MyScreen::PrintTwoEmissionGas(uint8_t distance,uint8_t gas, uint8_t transportation) //TODO : manage color directly instead of transportation
+{
+  
+  String convertNumber;
+
+  matrix_m->setTextSize(1);   // size 1 == 8 pixels high
+
+  MyScreen::Clear();
+  
+  // print each letter with a rainbow color
+  matrix_m->setCursor(8, 0);  // First line
+  if(transportation == 0) //bike
+  {
+    matrix_m->setTextColor(matrix_m->Color333(0,7,0));
+  }
+  else //car
+  {
+    matrix_m->setTextColor(matrix_m->Color333(7,0,0));
+  }
+  
+  convertNumber = String(distance*gas);
+  matrix_m->print(convertNumber);
+  
+  matrix_m->setCursor(0, 9);  // Second line
+  matrix_m->print("G.CO2");
+  
+  MyScreen::Update();
+
+}
+
 void MyScreen::PrintTestStatus(uint8_t actual, uint8_t total)
 {
   
@@ -166,6 +196,33 @@ void MyScreen::PrintJenkins(uint8_t * textToPrint)
   matrix_m->setTextColor(WHITE);
   
   secondLine = "INS";
+  matrix_m->print(secondLine);
+  
+  MyScreen::Update();
+
+}
+
+void MyScreen::PrintLoading(void)
+{
+  
+  String firstLine;
+  String secondLine;
+
+  matrix_m->setTextSize(1);   // size 1 == 8 pixels high
+
+  MyScreen::Clear();
+  
+  // print each letter with a rainbow color
+  matrix_m->setCursor(0, 0);  // First line
+  matrix_m->setTextColor(WHITE);
+  
+  firstLine = "LOAD";
+  matrix_m->print(firstLine);
+
+  matrix_m->setCursor(0, 9);  // Second line
+  matrix_m->setTextColor(WHITE);
+  
+  secondLine = "ING";
   matrix_m->print(secondLine);
   
   MyScreen::Update();
