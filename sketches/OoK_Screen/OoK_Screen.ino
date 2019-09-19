@@ -230,11 +230,11 @@ void screenUpdate(void)
       }
       else if (loopId < 200) 
       {
-        screen.PrintBike(GREEN, 0, 0);
+        screen.PrintBike(GREEN, 4, 0);
       }
       else if (loopId < 240)
       {
-        screen.PrintCar(RED, 0, 0);
+        screen.PrintCar(RED, 3, -2);
       }
 
       loopId++;

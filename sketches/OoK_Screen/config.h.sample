@@ -8,3 +8,4 @@
 
 #define WIFI_SSID "VG_EXTERNAL"
 #define WIFI_PASS "wlan-4-vaillant!"
+#define GOOGLE_MAP_API_KEY "xxxxxxxxxxx"

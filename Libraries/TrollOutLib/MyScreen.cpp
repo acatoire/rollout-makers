@@ -70,7 +70,7 @@ void MyScreen::PrintTwoTimes(uint8_t minutesByBike, uint8_t minutesByCar)
   MyScreen::Clear();
   
   // print each letter with a rainbow color
-  matrix_m->setCursor(8, 0);  // First line
+  matrix_m->setCursor(4, 0);  // First line
   matrix_m->setTextColor(matrix_m->Color333(0,7,0));
   
   convertNumber = String(minutesByBike);
@@ -78,7 +78,7 @@ void MyScreen::PrintTwoTimes(uint8_t minutesByBike, uint8_t minutesByCar)
   matrix_m->print(convertNumber);
   matrix_m->print("mn");
 
-  matrix_m->setCursor(8, 9);  // Second line
+  matrix_m->setCursor(4, 9);  // Second line
   matrix_m->setTextColor(matrix_m->Color333(7,0,0));
   convertNumber = String(minutesByCar);
   
@@ -141,7 +141,7 @@ void MyScreen::PrintTwoEmissionGas(uint8_t distance,uint8_t gas, uint8_t transpo
   convertNumber = String(distance*gas);
   matrix_m->print(convertNumber);
   
-  matrix_m->setCursor(0, 9);  // Second line
+  matrix_m->setCursor(2, 9);  // Second line
   matrix_m->print("G.CO2");
   
   MyScreen::Update();
@@ -213,16 +213,16 @@ void MyScreen::PrintLoading(void)
   MyScreen::Clear();
   
   // print each letter with a rainbow color
-  matrix_m->setCursor(0, 0);  // First line
+  matrix_m->setCursor(5, 0);  // First line
   matrix_m->setTextColor(WHITE);
   
   firstLine = "LOAD";
   matrix_m->print(firstLine);
 
-  matrix_m->setCursor(0, 9);  // Second line
+  matrix_m->setCursor(5, 9);  // Second line
   matrix_m->setTextColor(WHITE);
   
-  secondLine = "ING";
+  secondLine = "INFO";
   matrix_m->print(secondLine);
   
   MyScreen::Update();
