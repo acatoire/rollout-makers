@@ -16,6 +16,15 @@ The project is composed of several components:
    * Jenkins event
    * Running script event 
  
+### Sketches description
+
+- Ook_Screen: main project (ino) file. This file is used to assemble all the software part developt into only one sketch. This is the sketch used to make the video of project presentation.
+- GoogleMapRequest: this ino was used to debug google API library.
+- test_detection_sensor: this sketch is used to developt library related to the detection sensor.
+- test_google_distance_class and test_google_distance_direct: project files used to developt our library "MyTravel".
+- test_screen_class: project files used to developt our library "MyScreen".
+- test_web_server: project file used to developt the web/connectivity functions.
+
 ### Screens commands
 
 The blynk server host the followings elements:
