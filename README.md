@@ -82,6 +82,7 @@ Blynk Server ->> Client Arduino: Send ScreenMax
 |     5     | 
 
 ### Difficulties during development
-Understand how work with the google APi and make the existing google API library working again. Due to updates of other libraries, This last one didn't work anymore.
-In addition, we added the transportation option, in order to match with our project. 
+Make the existing google API library working again. Due to updates of other libraries, This last one didn't work anymore.
+These fix are enough to make a demonstration, but some minor bugs are still present and could be fix in the future. 
+In addition, we added the transportation option in this library, in order to match with our project. 
 
