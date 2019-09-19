@@ -29,7 +29,7 @@ class MyTravel
 	DirectionsResponse ConvertValueintoMinutesAndKilometers(DirectionsResponse info);
 
     // Default value, replaced by Init()
-    String origin_m       = "143 Boulevard Robert Schuman, Nantes";
+    String origin_m       = "140 Boulevard Robert Schuman, Nantes";
     String destination_m  = "17 Rue de la Petite Baratte, 44315 Nantes";
 
 	
