@@ -43,7 +43,7 @@ bool request_flag = true;
 
 //Google map Inputs
 
-String origin = "143 Boulevard Robert Schuman, Nantes";
+String origin = "140 Boulevard Robert Schuman, Nantes";
 String destination = "17 Rue de la Petite Baratte, 44315 Nantes";
 
 //google map output
