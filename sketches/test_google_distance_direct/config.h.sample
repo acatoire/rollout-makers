@@ -9,5 +9,5 @@
 //#define GOOGLE_MAP_API_KEY "AIzaSyDLo1YPxFG6HKQd-uQ3darr7jfa8TgFswA"
 
 #define WIFI_SSID "VG EXTERNAL"
-#define WIFI_PASS "wlan-4-vaillant!"
-#define GOOGLE_MAP_API_KEY "AIzaSyDLo1YPxFG6HKQd-uQ3darr7jfa8TgFswA"
+#define WIFI_PASS "HereYourWifiPassword"
+#define GOOGLE_MAP_API_KEY "HereYourGoogleMapAPI" //write your google map APi between the " "

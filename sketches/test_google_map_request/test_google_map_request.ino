@@ -29,7 +29,7 @@ void pageError(void);
 const char *ssid = WIFI_SSID;
 const char *password = WIFI_PASS;
 
-#define GOOGLE_MAP_API_KEY "AIzaSyDLo1YPxFG6HKQd-uQ3darr7jfa8TgFswA" //
+#define GOOGLE_MAP_API_KEY "HereYourGoogleMapAPI" //write your google map APi between the " "
 
 // Global declaration
 WebServer server(80);
