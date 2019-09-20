@@ -1,6 +1,6 @@
 // Config of private elements
 
-#define WIFI_SSID "VG_EXTERNAL"
+#define WIFI_SSID "HereYourWifiSSID"
 #define WIFI_PASS "HereYourWifiPassword"
 
 #define GOOGLE_MAP_API_KEY "HereYourGoogleMapAPI" //write your google map APi between the " "
