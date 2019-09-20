@@ -12,9 +12,9 @@ The screen will compare on google maps the distance/time/co² of transportation 
 
 ## Fun facts
 Coding the app, we were able to see some really interesting comparison depending on the hour of departure for our personal direction:
-8h      25mn by bike      30mn by car
-10h     24mn by bike      13mn by car
-18h     25mn by bike      45mn by car
+- 8h      25mn by bike      30mn by car
+- 10h     24mn by bike      13mn by car
+- 18h     25mn by bike      45mn by car
 
 That was really interesting to see it live and encouraging to continue the concept.
 
@@ -77,13 +77,13 @@ Sketches: Folders with all developed arduino sketches.
 
 ## How to start the demo
 
-Copy the full project folder on your computer (or fork/checkout it from github)
-Edit the two Mount.bat to have the right folders location on your machine
-Execute the two mount.bat in Libraries and Externals Libraries folders
-Edit the Config.h in Sketches/Ook_Screen with your wifi and google map api
-You can then start Ook_Screen.ino with your usual arduino environment
-Optional : You can use our blynk app by flashing the QR code from the project folder with blynk android or iphone app
-![](https://raw.githubusercontent.com/acatoire/rollout-makers/master/doc/blynk.jpg)
+- Copy the full project folder on your computer (or fork/checkout it from github)
+- Edit the two Mount.bat to have the right folders location on your machine
+- Execute the two mount.bat in Libraries and Externals Libraries folders
+- Edit the Config.h in Sketches/Ook_Screen with your wifi and google map api
+- You can then start Ook_Screen.ino with your usual arduino environment
+- Optional : You can use our blynk app by flashing the QR code from the project folder with blynk android or iphone app
+- ![](https://raw.githubusercontent.com/acatoire/rollout-makers/master/doc/blynk.jpg)
 
 ## Sketches
 We did develop the projects by step, allowing to split the work between each member of the team. We then create multiples arduino sketches to achieve our goal.
@@ -104,21 +104,21 @@ We did develop the projects by step, allowing to split the work between each mem
 Library folder contain a batch file use to easily mount all libraries of the folder on your computer. It creates symbolic links between arduino library folder and the project folder. It’s avoid to copy the libraries at different places on your computer.
 Only tested on (win7/8/10).
 
-### Libraries developed by the team (TrollOutLib
-MyScreen: contains functions to drive the screen
-MyScreenBmp: contains functions to draw bitmap on the screen
-MySensor: contains functions regarding the presence/detection sensor
-MyTravel: contains functions used to set travel options (transportation mode, addresses,...)
-MyValue.cpp: contains function to make operation on a value
+### Libraries developed by the team (TrollOutLib)
+- MyScreen: contains functions to drive the screen
+- MyScreenBmp: contains functions to draw bitmap on the screen
+- MySensor: contains functions regarding the presence/detection sensor
+- MyTravel: contains functions used to set travel options (transportation mode, addresses,...)
+- MyValue.cpp: contains function to make operation on a value
 
 ### Library modified/fixed by the team
-GoogleMapApi: existing arduino library create to make google map request.We modified because It was outdated and some request options for our project were missing.
+- GoogleMapApi: existing arduino library create to make google map request.We modified because It was outdated and some request options for our project were missing.
 
 ### Library directly used by the team
-Adafruit_GFX_Library: supplied library to drive the Adafruit screen
-Blynk: library used with the Android application which has the same name. It allows us to drive our application with smartphone.
-RGB-matric-Panel-master: library which add function to drive RGB matrix
-Json-streaming-parser: library used by the GoogleMapApi library in order to parse API request answer
+- Adafruit_GFX_Library: supplied library to drive the Adafruit screen
+- Blynk: library used with the Android application which has the same name. It allows us to drive our application with smartphone.
+- RGB-matric-Panel-master: library which add function to drive RGB matrix
+- Json-streaming-parser: library used by the GoogleMapApi library in order to parse API request answer
 
 ### ESP32 embedded library
 All other libraries used into the project are directly available when you compiled on a node32s target into arduino IDE.
